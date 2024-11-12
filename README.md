@@ -62,5 +62,5 @@ SNSでの発信、ソーシャルポートフォリオへの投稿
 * Figma URL  
 https://www.figma.com/board/qLUzx7nb0syGcKitsrqJoX/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E4%BD%9C%E6%88%90?node-id=0-1&t=otqxS2UlwA6kdbFc-1  　
 * 画面遷移図(企画段階)
-![alt text](image-2.png)
 ![alt text](image-1.png)
+![alt text](image-2.png)
