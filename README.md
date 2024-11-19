@@ -48,19 +48,29 @@ SNSでの発信、ソーシャルポートフォリオへの投稿
 * レスポンシブデザイン → Bootstrap
 * 映画データ → TMDb API
 * 音楽データ → Spotify API
-* 動画データ → Youtube Data API
 * 投稿閲覧機能 (未ログインでも利用可)
 * 投稿作成機能
 * 投稿編集機能
 * 投稿削除機能
+* コメント投稿機能
 * マイページ機能
 * お問い合わせフォーム
 * 退会フォーム
 * パスワード再設定機能
 
+# 投稿機能詳細
+・1つの投稿に複数の映画や複数の音楽を設定することはできない  
+・同じ楽曲を設定する場合、ユーザーに関わらず全て同じレコードを参照する
+
 # 画面遷移図
 * Figma URL  
 https://www.figma.com/board/qLUzx7nb0syGcKitsrqJoX/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E4%BD%9C%E6%88%90?node-id=0-1&t=otqxS2UlwA6kdbFc-1  　
 * 画面遷移図(企画段階)
-![alt text](image-1.png)
-![alt text](image-2.png)
+![alt text](UI-1.png)
+![alt text](UI-2.png)
+
+# ER図
+* DB Diagram URL  
+https://dbdiagram.io/d/RUNTEQ-67384e54e9daa85acaa647d9
+* ER図
+![alt text](ER.png)
