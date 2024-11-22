@@ -4,7 +4,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.8", ">= 7.0.8.6"
+gem 'rails', '7.0.8.6'
+
+# Active Record is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic
+gem 'activerecord', '7.0.8.6'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

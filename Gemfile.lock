@@ -217,6 +217,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord (= 7.0.8.6)
   bootsnap
   capybara
   debug
@@ -224,7 +225,7 @@ DEPENDENCIES
   jbuilder
   pg (~> 1.1)
   puma (~> 5.0)
-  rails (~> 7.0.8, >= 7.0.8.6)
+  rails (= 7.0.8.6)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
