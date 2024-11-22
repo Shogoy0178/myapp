@@ -9,6 +9,7 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgres://postgres:password@db/myapp_development
+      - RAILS_MASTER_KEY=2c6fd4cb47034255cb09c5ea32c2edc3
     depends_on:
       - db
 
