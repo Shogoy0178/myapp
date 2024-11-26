@@ -57,4 +57,9 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+
+  # filmusic.onrender.com を許可
+  config.hosts << "filmusic.onrender.com"
+
 end
