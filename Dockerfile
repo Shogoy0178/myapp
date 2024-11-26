@@ -1,6 +1,8 @@
 # Rubyベースイメージの指定
 FROM ruby:3.1.2
 
+RUN apt-get update && apt-get install -y vim
+
 # 必要なシステムライブラリをインストール
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
