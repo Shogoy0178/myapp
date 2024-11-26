@@ -33,6 +33,9 @@ RUN bundle install --without development test
 # COPY package.json yarn.lock /myapp/
 RUN yarn install
 
+# 環境変数 SECRET_KEY_BASE を設定 (ここで secret_key_base を設定)
+ENV SECRET_KEY_BASE=7db8111e1f877f7da33e13c87ceebd2693afbacb7953ab9cdc35c9ddd9c698f8f029ac4b59f5f638a552554bc65e9347a5f6d277c765fd765d20020e8f81098b
+
 # アプリケーションコードをすべてコピー
 COPY . /myapp
 
