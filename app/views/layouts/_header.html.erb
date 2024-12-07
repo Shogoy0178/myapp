@@ -20,7 +20,7 @@
       </ul>
     </nav>
 
-    <!-- ログイン・ログアウトリンク -->
+    <!-- ログイン/ログアウトリンク -->
     <div>
       <% if logged_in? %>
         <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-primary btn-sm", data: { turbo: false } %>
