@@ -54,6 +54,10 @@ gem "bootsnap", require: false
 # To login/logout users
 gem 'sorcery', '0.16.3'
 
+# To use amazon s3
+gem 'aws-sdk-s3', require: false
+
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
