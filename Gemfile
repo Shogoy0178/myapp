@@ -57,6 +57,11 @@ gem 'sorcery', '0.16.3'
 # To use amazon s3
 gem 'aws-sdk-s3', require: false
 
+# To use active storage
+gem 'image_processing', '~> 1.2'
+
+# To use active storage with vips
+gem 'ruby-vips', '~> 2.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

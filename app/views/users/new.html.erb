@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
       <h1>ユーザー登録</h1>
-      <%= form_with model: @user do |f| %>
+      <%= form_with model: @user, data: { turbo: false } do |f| %>
         <div class="mb-3">
           <%= f.label :name, class: "form-label" %>
           <%= f.text_field :name, class: "form-control" %>
@@ -18,6 +18,10 @@
         <div class="mb-3">
           <%= f.label :password_confirmation, class: "form-label" %>
           <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :avatar, "アバター画像", class: "form-label" %>
+          <%= f.file_field :avatar, class: "form-control" %>
         </div>
         <%= f.submit "登録", class: "btn btn-primary" %>
       <% end %>
