@@ -24,6 +24,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN apt-get update && apt-get install -y \
 libvips42
 
+RUN apt-get update -qq && apt-get install -y build-essential libssl-dev
+
 # アプリケーションディレクトリを作成
 WORKDIR /myapp
 
