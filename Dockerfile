@@ -26,6 +26,8 @@ libvips42
 
 RUN apt-get update -qq && apt-get install -y build-essential libssl-dev
 
+RUN apt-get update -qq && apt-get install -y postgresql-client
+
 # アプリケーションディレクトリを作成
 WORKDIR /myapp
 

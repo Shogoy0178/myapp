@@ -1,0 +1,20 @@
+<div class="movie-detail">
+  <p><%= @movie['title'] %></p>
+  <p><%= @movie['release_date'] %></p>
+  <% if @movie['poster_path'] %>
+    <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie['poster_path'], class: "card-size" %></p>
+  <% end %>
+  <p><%= @movie['overview'] %></p>
+
+  <h4>予告編</h4>
+  <% if @trailers.present? %>
+    <% @trailers.each do |trailer| %>
+      <p><%= trailer["name"] %></p>
+      <p>
+        <a href="https://www.youtube.com/watch?v=<%= trailer['key'] %>" target="_blank">予告編を見る</a>
+      </p>
+    <% end %>
+  <% else %>
+    <p>予告編が見つかりません。</p>
+  <% end %>
+</div>

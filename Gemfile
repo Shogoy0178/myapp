@@ -63,6 +63,10 @@ gem 'image_processing', '~> 1.2'
 # To use active storage with vips
 gem 'ruby-vips', '~> 2.2'
 
+# Use dotenv to load environment variables from .env into ENV in development
+gem 'dotenv-rails'
+
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
