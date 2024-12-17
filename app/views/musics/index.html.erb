@@ -1,0 +1,21 @@
+<h1>楽曲一覧</h1>
+
+<%= form_with url: musics_path, method: :get, local: true do |form| %>
+  <%= form.label :query, '検索キーワード' %>
+  <%= form.text_field :query %>
+  <%= form.submit '検索' %>
+<% end %>
+
+<% if @musics.present? %>
+  <ul>
+    <% @musics.each do |music| %>
+      <li>
+        <%= link_to music.name, music.external_urls['spotify'], target: "_blank" %> 
+        by <%= music.artists.map(&:name).join(', ') %>
+        - <%= link_to '詳細を見る', music_path(music.id) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>楽曲が見つかりませんでした。</p>
+<% end %>

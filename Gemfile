@@ -66,6 +66,9 @@ gem 'ruby-vips', '~> 2.2'
 # Use dotenv to load environment variables from .env into ENV in development
 gem 'dotenv-rails'
 
+# Use RSpotify to use Spotify API
+gem 'rspotify'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

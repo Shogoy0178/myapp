@@ -1,0 +1,19 @@
+<h1><%= @music.name %></h1>
+
+<p>
+  アーティスト: <%= @music.artists.map(&:name).join(', ') %><br>
+  アルバム: <%= @music.album.name %><br>
+  リリース日: <%= @music.album.release_date %><br>
+</p>
+
+<!-- Spotify Embed Player -->
+<iframe 
+  src="https://open.spotify.com/embed/track/<%= @music.id %>" 
+  width="800"  <!-- 横幅 -->
+  height="200" <!-- 高さ -->
+  frameborder="0" 
+  allowtransparency="true" 
+  allow="encrypted-media">
+</iframe>
+
+<%= link_to '一覧に戻る', musics_path %>
