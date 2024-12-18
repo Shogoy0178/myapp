@@ -9,9 +9,6 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_foreign_key :posts, :users
-    add_foreign_key :posts, :movies
-    add_foreign_key :posts, :musics
     add_index :posts, :user_id
     add_index :posts, :movie_id
     add_index :posts, :music_id
