@@ -1,12 +1,12 @@
 class MoviesController < ApplicationController
-  
+
   # 一覧表示
   def index
     if params[:looking_for]
       movie_title = params[:looking_for]
-      url = "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['TMDB_API']}&language=ja&query=" + URI.encode_www_form_component(movie_title)
+      url = "https://api.themoviedb.org/3/search/movie?api_key=80537932cccee8224eca42ede9757e98&language=ja&query=" + URI.encode_www_form_component(movie_title)
     else
-      url = "https://api.themoviedb.org/3/movie/popular?api_key=#{ENV['TMDB_API']}&language=ja"
+      url = "https://api.themoviedb.org/3/movie/popular?api_key=80537932cccee8224eca42ede9757e98&language=ja"
     end
   
     response = JSON.parse(Net::HTTP.get(URI.parse(url)))
