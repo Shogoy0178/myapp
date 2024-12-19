@@ -258,6 +258,14 @@ GEM
       ffi (~> 1.12)
       logger
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
@@ -282,6 +290,7 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.2)
     thor (1.3.2)
+    tilt (2.4.0)
     timeout (0.4.2)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
@@ -321,6 +330,7 @@ DEPENDENCIES
   rails (= 7.0.8.6)
   rspotify
   ruby-vips (~> 2.2)
+  sassc-rails (~> 2.1)
   selenium-webdriver
   sorcery (= 0.16.3)
   sprockets-rails
