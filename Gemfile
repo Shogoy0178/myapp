@@ -69,7 +69,10 @@ gem 'dotenv-rails'
 # Use RSpotify to use Spotify API
 gem 'rspotify'
 
+# Use scss for system
 gem 'sassc-rails', '~> 2.1'
+
+
 
 
 group :development, :test do
@@ -94,3 +97,11 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+gem "rails-html-sanitizer", "~> 1.6"
+
+gem "nokogiri", "~> 1.17"
+
+gem "erubi", "~> 1.13"
+
+gem "minitest", "~> 5.25"
