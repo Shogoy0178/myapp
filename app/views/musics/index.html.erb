@@ -7,15 +7,15 @@
 <% end %>
 
 <% if @musics.present? %>
-  <ul>
+  <div class="music-grid">
     <% @musics.each do |music| %>
-      <li>
-        <%= link_to music.name, music.external_urls['spotify'], target: "_blank" %> 
-        by <%= music.artists.map(&:name).join(', ') %>
-        - <%= link_to '詳細を見る', music_path(music.id) %>
-      </li>
+      <div class="music-item">
+        <p><%= music.name %> by <%= music.artists.map(&:name).join(', ') %></p>
+        <iframe src="https://open.spotify.com/embed/track/<%= music.id %>" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <p><%= link_to 'Spotifyで見る', music.external_urls['spotify'], target: "_blank" %></p>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <p>楽曲が見つかりませんでした。</p>
 <% end %>
