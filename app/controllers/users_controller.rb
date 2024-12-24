@@ -19,10 +19,16 @@ class UsersController < ApplicationController
     end
   end
 
-  # 追加: ユーザー一覧表示
   def index
     @users = User.order(created_at: :desc) # 登録が新しい順に取得
   end  
+
+  # 追加: マイページ表示
+  def show
+    @user = User.find(params[:id])
+    redirect_to root_path, alert: "アクセス権がありません。" unless @user == current_user
+  end
+  
 
   private
 

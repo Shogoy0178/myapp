@@ -1,0 +1,27 @@
+<%= content_for :title, "#{@user.name} さんのマイページ" %>
+
+<div class="mypage-header">
+  <h1><%= @user.name %> さんのマイページ</h1>
+</div>
+
+<div class="user-info">
+  <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+
+  <% if @user.avatar.attached? %>
+    <p><strong>アバター:</strong></p>
+    <%= image_tag @user.avatar, class: "mypage-avatar" %>
+  <% end %>
+</div>
+
+<div class="related-info">
+  <h2>関連情報</h2>
+  <% if defined?(@posts) && @posts.any? %>
+    <ul>
+      <% @posts.each do |post| %>
+        <li><%= link_to post.title, post_path(post) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>まだ投稿がありません。</p>
+  <% end %>
+</div>
