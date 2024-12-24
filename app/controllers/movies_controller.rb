@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     end
   
     response = JSON.parse(Net::HTTP.get(URI.parse(url)))
-    @movies = response["results"].first(5)  # 最初の5件だけ取得
+    @movies = response["results"].first(30)  # 最初の5件だけ取得
   
     # デバッグ情報をログに出力
     logger.debug "Movies with Trailers: #{@movies}"

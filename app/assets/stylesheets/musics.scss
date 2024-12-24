@@ -1,19 +1,122 @@
+// 色やフォントに関する変数定義
+$primary-color: #f44336; // 新しい主色として赤系を使用
+$secondary-color: #3f51b5; // サブカラーとして青系
+$background-color: #fafafa; // 背景色は淡いグレー
+$text-color: #212121; // テキストの色をダークグレーに
+$border-color: #e0e0e0; // 境界線色
+$link-hover-color: darken($primary-color, 15%);
+
+// 全体の背景色とフォント設定
+body {
+  background-color: $background-color;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: $text-color;
+  margin: 0;
+  padding: 20px;
+}
+
+// 検索フォームのスタイル
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: $text-color;
+  }
+
+  input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    width: 350px;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+
+  input[type="submit"] {
+    padding: 12px 24px;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $link-hover-color;
+    }
+  }
+}
+
+// 楽曲グリッドのスタイル
 .music-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4列 */
-  gap: 16px; /* アイテム間のスペース */
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
 }
 
+// 個別楽曲アイテムのスタイル
 .music-item {
+  background-color: white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  background-color: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  p {
+    margin: 15px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: $text-color;
+  }
+
+  iframe {
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 15px;
+    color: $secondary-color;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
 }
 
-.music-item p {
-  margin: 8px 0;
+// 楽曲が見つからない場合のメッセージ
+p {
+  text-align: center;
+  font-size: 18px;
+  color: $text-color;
+  font-weight: bold;
+  margin-top: 50px;
 }

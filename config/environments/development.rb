@@ -74,4 +74,7 @@ Rails.application.configure do
   # filmusic.onrender.com を許可
   config.hosts << "filmusic.onrender.com"
 
+  config.assets.debug = true
+  config.assets.check_precompiled_asset = false
+
 end
