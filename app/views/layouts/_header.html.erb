@@ -25,12 +25,16 @@
         <li class="nav-item">
           <%= link_to "音楽一覧", musics_path, class: "nav-link text-dark" %>
         </li>
+        <!-- 投稿一覧メニュー -->
+        <li class="nav-item">
+          <%= link_to "投稿一覧", posts_path, class: "nav-link text-dark" %>
+        </li>        
         <!-- マイページメニュー（ログインしている場合） -->
         <% if logged_in? %>
           <li class="nav-item">
             <%= link_to "マイページ", user_path(current_user), class: "nav-link text-dark" %>
           </li>
-        <% end %>        
+        <% end %>                  
       </ul>
     </nav>
 

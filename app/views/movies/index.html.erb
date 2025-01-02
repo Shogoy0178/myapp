@@ -1,3 +1,4 @@
+<!-- 映画検索フォーム -->
 <div class="search-container">
   <%= form_tag(movies_path, method: :get, class: "search-form") do %>
     <%= search_field_tag :looking_for, nil, placeholder: 'Movie Title...', class: "search-input" %>
@@ -5,22 +6,38 @@
   <% end %>
 </div>
 
-<div class="movies-container">
-  <% if @movies.any? %>
-    <% @movies.each do |movie| %>
-      <div class="movie-card">
-        <p class="movie-title"><%= movie['title'] %></p>
-        <%= link_to movie_path(movie['id']), class: "movie-link" do %>
-          <% if movie['poster_path'] %>
-            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "movie-poster" %>
-          <% else %>
-            <p class="no-poster">No Poster Available</p>
+<!-- 映画選択フォーム -->
+<%= form_with url: save_selected_movies_path, method: :post, class: "movies-selection-form" do %>
+  <div class="movies-container">
+    <% if @movies.any? %>
+      <% @movies.each do |movie| %>
+        <div class="movie-card">
+          <p class="movie-title"><%= movie['title'] %></p>
+
+          <%= link_to movie_path(movie['id']), class: "movie-link" do %>
+            <% if movie['poster_path'] %>
+              <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "movie-poster" %>
+            <% else %>
+              <p class="no-poster">No Poster Available</p>
+            <% end %>
           <% end %>
-        <% end %>
-        <p class="movie-details-link"><%= link_to "詳細へ", movie_path(movie['id']) %></p>
-      </div>
+
+          <!-- 映画選択ラジオボタン -->
+          <div class="movie-radio">
+            <%= radio_button_tag "movie_id", movie['id'], false, id: "movie-#{movie['id']}" %>
+            <%= label_tag "movie-#{movie['id']}", "選択" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="no-movies-message">No movies found. Please try another search term.</p>
     <% end %>
-  <% else %>
-    <p class="no-movies-message">No movies found. Please try another search term.</p>
+  </div>
+
+  <!-- 選択ボタン -->
+  <% if @movies.any? %>
+    <div class="movies-selection-actions">
+      <%= submit_tag "決定", class: "btn btn-primary" %>
+    </div>
   <% end %>
-</div>
+<% end %>

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   # ActiveStorage設定
   has_one_attached :avatar
 
+  has_many :posts, dependent: :destroy
+
   # バリデーション
   validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }

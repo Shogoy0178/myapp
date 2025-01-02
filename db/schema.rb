@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_18_220054) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_02_080259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_18_220054) do
     t.string "trailer_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tmdb_movie_id"], name: "index_movies_on_tmdb_movie_id", unique: true
   end
 
   create_table "musics", force: :cascade do |t|
@@ -57,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_18_220054) do
     t.string "artist"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["spotify_track_id"], name: "index_musics_on_spotify_track_id", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
