@@ -1,8 +1,10 @@
+<h1>映画一覧</h1>
+
 <!-- 映画検索フォーム -->
-<div class="search-container">
-  <%= form_tag(movies_path, method: :get, class: "search-form") do %>
-    <%= search_field_tag :looking_for, nil, placeholder: 'Movie Title...', class: "search-input" %>
-    <%= submit_tag 'Search', class: "search-button" %>
+<div class="movie-search-container">
+  <%= form_tag(movies_path, method: :get, class: "movie-search-form") do %>
+    <%= search_field_tag :looking_for, nil, placeholder: 'キーワードを入力', class: "movie-search-input" %>
+    <%= submit_tag '検索', class: "movie-search-button" %>
   <% end %>
 </div>
 
@@ -25,7 +27,6 @@
           <!-- 映画選択ラジオボタン -->
           <div class="movie-radio">
             <%= radio_button_tag "movie_id", movie['id'], false, id: "movie-#{movie['id']}" %>
-            <%= label_tag "movie-#{movie['id']}", "選択" %>
           </div>
         </div>
       <% end %>
@@ -36,8 +37,8 @@
 
   <!-- 選択ボタン -->
   <% if @movies.any? %>
-    <div class="movies-selection-actions">
-      <%= submit_tag "決定", class: "btn btn-primary" %>
+    <div class="decision-button-container">
+      <%= submit_tag "決定", class: "btn btn-success decision-button" %>
     </div>
   <% end %>
 <% end %>

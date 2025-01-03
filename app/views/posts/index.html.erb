@@ -1,29 +1,45 @@
 <h1>投稿一覧</h1>
 
 <% if @posts.any? %>
-  <ul>
+  <ul class="posts-container">
     <% @posts.each do |post| %>
-      <li>
-        <p><%= post.body.truncate(100) %></p>
-        
-        <% if post.movie %>
-          <p><strong>映画タイトル:</strong> <%= post.movie.title %></p>
-          <p><strong>映画ポスター:</strong> <%= image_tag post.movie.poster_url, alt: post.movie.title if post.movie.poster_url.present? %></p>
-        <% else %>
-          <p>映画情報はありません。</p>
-        <% end %>
+      <li class="post-item">
+        <!-- ポスター部分（左側） -->
+        <div class="post-movie">
+          <% if post.movie.poster_url.present? %>
+            <%= image_tag post.movie.poster_url, alt: post.movie.title, class: "movie-poster" %>
+          <% else %>
+            <p>ポスターがありません。</p>
+          <% end %>
+        </div>
 
-        <% if post.music %>
-          <p><strong>音楽タイトル:</strong> <%= post.music.title %></p>
-          <p><strong>アーティスト:</strong> <%= post.music.artist %></p>
-        <% else %>
-          <p>音楽情報はありません。</p>
-        <% end %>
+        <!-- コンテンツ部分（右側） -->
+        <div class="post-content">
+          <!-- 音楽トラック（右上） -->
+          <% if post.music %>
+            <div class="music-info">
+              <iframe 
+                src="https://open.spotify.com/embed/track/<%= post.music.spotify_track_id %>" 
+                width="100%" 
+                height="60" 
+                frameborder="0" 
+                allowtransparency="true" 
+                allow="encrypted-media">
+              </iframe>
+            </div>
+          <% end %>
 
-        <p>
-          <%= link_to '編集', edit_post_path(post) %> | 
-          <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-        </p>
+          <!-- コメント部分（右下） -->
+          <div class="post-body">
+            <%= post.body.truncate(100) %>
+          </div>
+        </div>
+
+        <!-- 編集・削除ボタン -->
+        <div class="post-actions">
+          <%= link_to '編集', edit_post_path(post), class: "btn btn-edit" %>
+          <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+        </div>
       </li>
     <% end %>
   </ul>
@@ -31,4 +47,4 @@
   <p>投稿はありません。</p>
 <% end %>
 
-<%= link_to '新規投稿', new_post_path %>
+<%= link_to '新規投稿', new_post_path, class: "btn btn-new" %>

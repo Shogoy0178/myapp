@@ -1,0 +1,56 @@
+<h1>投稿一覧</h1>
+
+<% if @posts.any? %>
+  <ul>
+    <% @posts.each do |post| %>
+      <li>
+        <p><%= post.body.truncate(100) %></p>
+        
+        <% if post.movie %>
+          <p><strong>映画タイトル:</strong> <%= post.movie.title %></p>
+          <p><strong>映画ポスター:</strong> <%= image_tag post.movie.poster_url, alt: post.movie.title if post.movie.poster_url.present? %></p>
+            <% if post.movie.trailer_url.present? %>
+              <p>予告編:</p>
+              <iframe 
+                width="560" 
+                height="315" 
+                src="<%= post.movie.trailer_url.gsub('watch?v=', 'embed/') %>" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            <% else %>
+            <p>予告編はありません。</p>
+            <% end %>
+          <% else %>
+          <p>映画情報はありません。</p>
+        <% end %>
+
+        <% if post.music %>
+          <p><strong>音楽タイトル:</strong> <%= post.music.title %></p>
+          <p><strong>アーティスト:</strong> <%= post.music.artist %></p>
+          <iframe 
+          src="https://open.spotify.com/embed/track/<%= post.music.spotify_track_id %>" 
+          width="300" 
+          height="80" 
+          frameborder="0" 
+          allowtransparency="true" 
+          allow="encrypted-media">
+          </iframe>
+        <% else %>
+          <p>音楽情報はありません。</p>
+        <% end %>
+
+        <p>
+          <%= link_to '編集', edit_post_path(post) %> | 
+          <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>投稿はありません。</p>
+<% end %>
+
+<%= link_to '新規投稿', new_post_path %>

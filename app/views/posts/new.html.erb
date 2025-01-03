@@ -1,63 +1,74 @@
-<h1>新規投稿</h1>
-
 <%= form_with(model: @post, local: true, data: { turbo: false }) do |form| %>
-  <!-- 本文の追加 -->
-  <div class="form-group">
-    <%= form.label :body, "本文" %>
-    <%= form.text_area :body, class: "form-control", rows: 5 %>
-  </div>
+  <div class="post-form-container">
+    <!-- 左半分：映画選択ボタン + 映画情報 -->
+    <div class="left-block">
+      <div class="movie-info">
+        <h3 class="section-title">映画情報</h3>
+        <div class="form-group">
+          <%= link_to '映画を選択', movies_path, class: "btn btn-primary" %>
+        </div>
+        
+        <% if @selected_movie %>
+          <div class="movie-poster-container">
+            <p class="movie-title">映画タイトル: <%= @selected_movie["title"] %></p>
+            <%= image_tag @selected_movie["poster_url"], alt: @selected_movie["title"], class: "movie-poster" %>
+          </div>
+          <div class="movie-trailer-container">
+            <% if @selected_movie["trailer_url"].present? %>
+              <p class="trailer-text">予告編:</p>
+              <iframe 
+                width="350" 
+                height="200" 
+                src="<%= @selected_movie["trailer_url"].gsub('watch?v=', 'embed/') %>" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            <% else %>
+              <p>予告編はありません。</p>
+            <% end %>
+          </div>
+        <% else %>
+          <p>選択された映画はありません。</p>
+        <% end %>
+      </div> 
+    </div>
 
-  <!-- 映画選択ボタン -->
-  <div class="form-group">
-    <%= link_to '映画を選択', movies_path, class: "btn btn-primary" %>
-  </div>
-
-  <!-- 音楽選択ボタン -->
-  <div class="form-group">
-    <%= link_to '音楽を選択', musics_path, class: "btn btn-primary" %>
-  </div>
-
-  <!-- 映画情報の表示 -->
-  <% if @selected_movie %>
-    <p>映画タイトル: <%= @selected_movie["title"] %></p>
-    <p><%= image_tag @selected_movie["poster_url"], alt: @selected_movie["title"] %></p>
-
-    <% if @selected_movie["trailer_url"].present? %>
-      <div class="trailer">
-        <p>予告編:</p>
-        <iframe 
-          width="560" 
-          height="315" 
-          src="<%= @selected_movie["trailer_url"].gsub('watch?v=', 'embed/') %>" 
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
+    <!-- 右半分：音楽選択ボタン + 音楽情報 + コメント -->
+    <div class="right-block">
+      <div class="music-info">
+        <h3 class="section-title">音楽情報</h3>
+        <div class="form-group">
+          <%= link_to '音楽を選択', musics_path, class: "btn btn-primary" %>
+        </div>
+        <% if @selected_music %>
+          <p class="music-title">音楽タイトル: <%= @selected_music["name"] %></p>
+          <p class="artist">アーティスト: <%= @selected_music["artist"] %></p>
+          <iframe 
+            src="https://open.spotify.com/embed/track/<%= @selected_music["id"] %>" 
+            width="300" 
+            height="80" 
+            frameborder="0" 
+            allowtransparency="true" 
+            allow="encrypted-media">
+          </iframe>
+        <% else %>
+          <p>選択された音楽はありません。</p>
+        <% end %>
       </div>
-    <% else %>
-      <p>予告編はありません。</p>
-    <% end %>
-  <% else %>
-    <p>選択された映画はありません。</p>
-  <% end %>
 
-  <!-- 音楽情報の表示 -->
-  <% if @selected_music %>
-    <p>音楽タイトル: <%= @selected_music["name"] %></p>
-    <p>アーティスト: <%= @selected_music["artist"] %></p>
-    <p>アルバム: <%= @selected_music["album"] %></p>
-    <iframe 
-      src="https://open.spotify.com/embed/track/<%= @selected_music["id"] %>" 
-      width="300" 
-      height="80" 
-      frameborder="0" 
-      allowtransparency="true" 
-      allow="encrypted-media">
-    </iframe>
-  <% else %>
-    <p>選択された音楽はありません。</p>
-  <% end %>
-
-  <%= form.submit "投稿", class: "btn btn-primary" %>
+      <!-- コメント入力欄 -->
+      <div class="comment-section">
+        <h3 class="section-title">コメント</h3>
+        <div class="comment-group">
+          <%= form.text_area :body, class: "form-control comment-textarea", rows: 5 %>
+        </div>
+      </div>      
+      <!-- 投稿ボタン -->
+      <div class="post-submit-button">
+        <%= form.submit "投稿", class: "btn btn-primary" %>
+      </div>
+    </div>  
+  </div>
 <% end %>

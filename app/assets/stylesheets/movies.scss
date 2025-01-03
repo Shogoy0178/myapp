@@ -1,43 +1,99 @@
-// 変数の定義
 $primary-color: #007bff;
 $primary-hover-color: #0056b3;
 $border-color: #ddd;
 $text-color: #333;
 $muted-color: #888;
+$link-hover-color: darken($primary-color, 15%);
 
-// 検索コンテナ
-.search-container {
+.movie-search-container {
   display: flex;
   justify-content: center;
   margin: 20px 0;
+  width: 100%; 
+}
 
-  .search-form {
-    display: flex;
-    align-items: center;
+.movie-search-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-    .search-input {
-      width: 300px;
-      padding: 10px;
-      border: 1px solid $border-color;
-      border-radius: 4px;
-      margin-right: 10px;
-      font-size: 16px;
-    }
+.movie-search-input {
+  width: 350px;
+  padding: 12px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
 
-    .search-button {
-      padding: 10px 20px;
-      background-color: $primary-color;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+  &:focus {
+    border-color: $primary-color;
+  }
+}
 
-      &:hover {
-        background-color: $primary-hover-color;
-      }
-    }
+.movie-search-button {
+  padding: 12px 24px;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-hover-color;
+  }
+}
+
+// 映画選択ボタンのスタイル
+// 映画選択フォームのスタイル
+.movies-selection-form {
+  position: relative; /* 親要素に相対的に配置 */
+  padding-bottom: 60px; /* 最下部に余白を追加してボタンが隠れないように */
+}
+
+// 映画選択ボタンのスタイル
+.decision-button-container {
+  position: absolute; /* 絶対位置で配置 */
+  bottom: 20px; /* フォームの最下部から20pxの距離を確保 */
+  left: 50%; /* 水平方向に中央配置 */
+  transform: translateX(-50%); /* 水平方向に中央揃え */
+  width: 100%; /* 親要素の幅に合わせる */
+  text-align: center; /* ボタンを中央に寄せる */
+}
+
+.decision-button {
+  padding: 12px 24px;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $link-hover-color;
+  }
+}
+
+
+.btn-primary {
+  padding: 12px 24px;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-hover-color;
   }
 }
 
@@ -50,7 +106,7 @@ $muted-color: #888;
   margin: 20px;
 
   .movie-card {
-    width: 200px;
+    width: calc(25% - 15px); 
     border: 1px solid $border-color;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -76,7 +132,7 @@ $muted-color: #888;
 
     .movie-poster {
       width: 100%;
-      height: auto;
+      height: 450px;
       border-bottom: 1px solid $border-color;
     }
 
@@ -85,26 +141,24 @@ $muted-color: #888;
       font-size: 14px;
       color: $muted-color;
     }
-
-    .movie-details-link {
-      display: block;
-      margin: 10px 0;
-      font-size: 14px;
-      color: $primary-color;
-      text-decoration: none;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: $primary-hover-color;
-      }
-    }
   }
 }
 
-// 映画が見つからない場合のメッセージ
-.no-movies-message {
-  text-align: center;
-  font-size: 18px;
-  color: $muted-color;
-  margin: 20px 0;
+// メディアクエリ
+@media (max-width: 1024px) {
+  .movies-container .movie-card {
+    width: calc(33.33% - 15px); 
+  }
+}
+
+@media (max-width: 768px) {
+  .movies-container .movie-card {
+    width: calc(50% - 15px); 
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-container .movie-card {
+    width: 100%; 
+  }
 }

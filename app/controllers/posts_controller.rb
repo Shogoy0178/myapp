@@ -108,7 +108,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :movie_id, :music_id)
+    params.require(:post).permit(:body, :movie_id, :music_id)
   end
 
   def set_movie

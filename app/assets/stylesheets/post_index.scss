@@ -1,0 +1,114 @@
+/* 投稿全体をグリッドで1つの投稿を3分割する */
+.posts-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列にする */
+  gap: 20px; /* 各投稿の間隔 */
+  margin-top: 20px;
+}
+
+/* 各投稿アイテムのスタイル */
+.post-item {
+  display: flex;
+  flex-direction: row; /* 横並び */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 10px;
+  height: 350px; /* 投稿の高さ */
+  box-sizing: border-box; /* パディングが高さに影響しないように */
+  position: relative; /* 編集・削除ボタンを右下に配置するため */
+}
+
+/* ポスター部分（左側） */
+.post-movie {
+  flex: 0 0 35%; /* ポスター部分は35%の幅 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  overflow: hidden; /* ポスターが枠をはみ出さないようにする */
+}
+
+.movie-poster {
+  width: 100%; /* 親要素の幅に合わせてポスターの幅を調整 */
+  height: auto; /* 縦横比を保ちながら高さを調整 */
+  object-fit: cover; /* 縦横比を保ちながら親要素のサイズに収める */
+}
+
+/* 右側のコンテンツ */
+.post-content {
+  flex: 1; /* 残りの幅を占める */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 音楽とコメントを上下に配置 */
+  padding: 5px;
+  height: 100%; /* コンテンツ領域を100%に */
+}
+
+/* 音楽部分（右上） */
+.music-info {
+  flex: 0 0 30%; /* 音楽トラック部分を60%の高さに変更 */
+  margin-bottom: 5px; /* 音楽部分の下に少し余白を追加 */
+}
+
+.music-info iframe {
+  width: 100%; /* 音楽トラックを枠いっぱいに */
+  height: 100%; /* 音楽トラックの高さを大きくする */
+  border: none; /* iframeの枠線を削除 */
+}
+
+/* コメント部分（右下） */
+.post-body {
+  flex: 0 0 35%; /* コメント部分は30%の高さ */
+  border: 1px solid #ccc; /* コメントに枠を追加 */
+  padding: 5px;
+  margin-top: 5px; /* 音楽とコメントの間の余白を減らす */
+  overflow-y: auto; /* コメントが長くなった場合はスクロール */
+  font-size: 0.8em; /* コメントのフォントサイズを小さく */
+}
+
+/* 編集・削除ボタン */
+.post-actions {
+  position: absolute; /* 投稿アイテム内で絶対配置 */
+  bottom: 10px; /* 下から10pxの位置に配置 */
+  right: 10px; /* 右から10pxの位置に配置 */
+  text-align: right;
+}
+
+.btn {
+  font-size: 0.8em; /* ボタンの文字サイズを少し調整 */
+  padding: 5px 8px;
+  margin: 0 5px;
+  background-color: #007bff; /* 青色の背景 */
+  color: white; /* 白い文字 */
+  border: none; /* ボーダーを消す */
+  border-radius: 5px; /* 角を丸くする */
+  cursor: pointer; /* カーソルをポインターに */
+}
+
+.btn:hover {
+  background-color: #0056b3; /* ホバー時に背景色を変更 */
+}
+
+.btn-delete {
+  background-color: #dc3545; /* 赤色の背景 */
+}
+
+.btn-delete:hover {
+  background-color: #c82333; /* ホバー時に赤色を変更 */
+}
+
+.btn-new {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #28a745; /* 緑色の背景 */
+  color: white; /* 白い文字 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none; /* リンクの下線を消す */
+}
+
+.btn-new:hover {
+  background-color: #218838; /* ホバー時に緑色を変更 */
+}
