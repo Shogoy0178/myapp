@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy", as: :logout
 
-  resources :posts
+  resources :posts, only: [:index, :new, :create, :edit, :update, :destroy, :show]
   resources :movies, only: [:index, :show] do
     collection do
       post :save_selected

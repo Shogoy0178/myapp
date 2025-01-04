@@ -25,10 +25,10 @@ class MusicsController < ApplicationController
     end
   end
 
-  # save_selectedアクション内
   def save_selected
     selected_music_id = params[:selected_music_id]
-
+    post_id = params[:post_id] # 投稿IDを取得
+  
     if selected_music_id.present?
       begin
         @music = RSpotify::Track.find(selected_music_id)
@@ -41,11 +41,30 @@ class MusicsController < ApplicationController
           album: @music.album.name,
           external_url: @music.external_urls['spotify']
         }
-        
-        # セッションに保存されたデータをログに表示して確認
-        Rails.logger.debug "セッションに保存された音楽情報: #{session[:selected_music]}"
-
-        redirect_to new_post_path
+  
+        # 投稿IDが渡されていれば、その投稿を更新する
+        if post_id.present?
+          post = Post.find(post_id)
+  
+          # 音楽が存在しない場合、Musics テーブルに新しい音楽情報を追加
+          music = Music.find_or_create_by(spotify_track_id: @music.id) do |m|
+            m.spotify_track_id = @music.id
+            m.title = @music.name
+            m.artist = @music.artists.map(&:name).join(', ')
+          end
+  
+          # 音楽IDを投稿に関連付け
+          post.music_id = music.id
+          post.save
+        end
+  
+        # 投稿IDが渡されていればedit画面、なければnew画面へ遷移
+        if post_id.present?
+          redirect_to edit_post_path(post_id)
+        else
+          redirect_to new_post_path
+        end
+  
       rescue StandardError => e
         Rails.logger.error "Spotify API Error during save_selected: #{e.message}"
         redirect_to musics_path, alert: "選択した楽曲を保存できませんでした。"
@@ -53,7 +72,7 @@ class MusicsController < ApplicationController
     else
       redirect_to musics_path, alert: "音楽を選択してください。"
     end
-  end
+  end  
 
 
   private

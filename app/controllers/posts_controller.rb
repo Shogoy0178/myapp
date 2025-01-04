@@ -30,13 +30,13 @@ class PostsController < ApplicationController
       movie_data = session[:selected_movie]
       logger.debug "Session movie data: #{movie_data}"
   
-      # 新しい映画を保存
-      movie = Movie.create(
-        tmdb_movie_id: movie_data["id"],
-        title: movie_data["title"],
-        poster_url: movie_data["poster_url"],
-        trailer_url: movie_data["trailer_url"]
-      )
+      # 映画が既に存在するか確認（重複防止）
+      movie = Movie.find_or_create_by(tmdb_movie_id: movie_data["id"]) do |m|
+        m.tmdb_movie_id = movie_data["id"]
+        m.title = movie_data["title"]
+        m.poster_url = movie_data["poster_url"]
+        m.trailer_url = movie_data["trailer_url"]
+      end
       logger.debug "Created movie: #{movie.attributes}" if movie.persisted?
       logger.debug "Movie save errors: #{movie.errors.full_messages}" unless movie.persisted?
   
@@ -51,12 +51,12 @@ class PostsController < ApplicationController
       music_data = session[:selected_music]
       logger.debug "Session music data: #{music_data}"
   
-      # 新しい音楽を保存
-      music = Music.create(
-        spotify_track_id: music_data["id"],
-        title: music_data["name"],
-        artist: music_data["artist"]
-      )
+      # 音楽が既に存在するか確認（重複防止）
+      music = Music.find_or_create_by(spotify_track_id: music_data["id"]) do |m|
+        m.spotify_track_id = music_data["id"]
+        m.title = music_data["name"]
+        m.artist = music_data["artist"]
+      end
       logger.debug "Created music: #{music.attributes}" if music.persisted?
       logger.debug "Music save errors: #{music.errors.full_messages}" unless music.persisted?
   
@@ -79,21 +79,67 @@ class PostsController < ApplicationController
       flash.now[:alert] = "投稿の作成に失敗しました。入力内容を確認してください。"
       render :new
     end
-  end
+  end  
   
+  # 投稿詳細表示
+  def show
+    @post = Post.includes(:movie, :music).find(params[:id])
+  end
 
   # 編集フォーム
   def edit
+    @post = Post.includes(:movie, :music).find(params[:id])
   end
 
-  # 投稿の更新
   def update
+    # 映画と音楽を更新する
     if @post.update(post_params)
+      if session[:selected_movie].present?
+        movie_data = session[:selected_movie]
+        
+        # 映画が存在するか確認
+        movie = @post.movie || Movie.find_by(tmdb_movie_id: movie_data["id"])
+  
+        if movie.nil?
+          # 映画が見つからない場合、新しく作成
+          movie = Movie.create(
+            tmdb_movie_id: movie_data["id"],
+            title: movie_data["title"],
+            poster_url: movie_data["poster_url"],
+            trailer_url: movie_data["trailer_url"]
+          )
+        end
+  
+        # 更新した映画を再関連付け
+        @post.movie = movie
+      end
+  
+      if session[:selected_music].present?
+        music_data = session[:selected_music]
+        
+        # 音楽が存在するか確認
+        music = @post.music || Music.find_by(spotify_track_id: music_data["id"])
+  
+        if music.nil?
+          # 音楽が見つからない場合、新しく作成
+          music = Music.create(
+            spotify_track_id: music_data["id"],
+            title: music_data["name"],
+            artist: music_data["artist"]
+          )
+        end
+  
+        # 更新した音楽を再関連付け
+        @post.music = music
+      end
+  
+      # 投稿を保存してリダイレクト
       redirect_to posts_path, notice: "投稿が更新されました。"
     else
       render :edit
     end
-  end
+  end  
+  
 
   # 投稿の削除
   def destroy

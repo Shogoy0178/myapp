@@ -1,0 +1,71 @@
+<div class="post-form-container">
+  <!-- 左半分：映画選択ボタン + 映画情報 -->
+  <div class="left-block">
+    <div class="movie-info">
+      <h3 class="section-title">映画情報</h3>
+      
+      <% if @post.movie %>
+        <div class="movie-poster-container">
+          <p class="movie-title">映画タイトル: <%= @post.movie.title %></p>
+          <%= image_tag @post.movie.poster_url, alt: @post.movie.title, class: "movie-poster" %>
+        </div>
+        <div class="movie-trailer-container">
+          <% if @post.movie.trailer_url.present? %>
+            <p class="trailer-text">予告編:</p>
+            <iframe 
+              width="350" 
+              height="200" 
+              src="<%= @post.movie.trailer_url.gsub('watch?v=', 'embed/') %>" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          <% else %>
+            <p>予告編はありません。</p>
+          <% end %>
+        </div>
+      <% else %>
+        <p>選択された映画はありません。</p>
+      <% end %>
+    </div> 
+  </div>
+
+  <!-- 右半分：音楽選択ボタン + 音楽情報 + コメント -->
+  <div class="right-block">
+    <div class="music-info">
+      <h3 class="section-title">音楽情報</h3>
+      <% if @post.music %>
+        <p class="music-title">音楽タイトル: <%= @post.music.title %></p>
+        <p class="artist">アーティスト: <%= @post.music.artist %></p>
+        <iframe 
+          src="https://open.spotify.com/embed/track/<%= @post.music.spotify_track_id %>" 
+          width="300" 
+          height="80" 
+          frameborder="0" 
+          allowtransparency="true" 
+          allow="encrypted-media">
+        </iframe>
+      <% else %>
+        <p>選択された音楽はありません。</p>
+      <% end %>
+    </div>
+
+    <div class="comment-section">
+      <h3 class="section-title">コメント</h3>
+      <div class="comment-group">
+        <div class="comment-box">
+          <%= @post.body.presence || "コメントはまだありません。" %>
+        </div>
+      </div>
+    </div>
+    <!-- ボタンを追加 -->
+    <div class="show-actions">
+      <!-- 戻るボタン -->
+      <%= link_to '戻る', posts_path, class: 'btn btn-secondary' %>
+      
+      <!-- 編集ボタン (投稿を編集できるリンク) -->
+      <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
+    </div>    
+  </div>  
+</div>

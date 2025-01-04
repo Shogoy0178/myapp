@@ -3,6 +3,8 @@
 <!-- 映画検索フォーム -->
 <div class="movie-search-container">
   <%= form_tag(movies_path, method: :get, class: "movie-search-form") do %>
+    <!-- 投稿IDを隠しフィールドとして渡す -->
+    <%= hidden_field_tag :post_id, params[:post_id] %> 
     <%= search_field_tag :looking_for, nil, placeholder: 'キーワードを入力', class: "movie-search-input" %>
     <%= submit_tag '検索', class: "movie-search-button" %>
   <% end %>
@@ -10,6 +12,9 @@
 
 <!-- 映画選択フォーム -->
 <%= form_with url: save_selected_movies_path, method: :post, class: "movies-selection-form" do %>
+  <!-- 投稿IDを隠しフィールドで渡す -->
+  <%= hidden_field_tag :post_id, params[:post_id] %>
+
   <div class="movies-container">
     <% if @movies.any? %>
       <% @movies.each do |movie| %>
