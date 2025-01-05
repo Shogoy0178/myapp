@@ -9,6 +9,9 @@ class MusicsController < ApplicationController
     else
       @musics = fetch_random_musics
     end
+
+    # ページネーション設定
+    @musics = Kaminari.paginate_array(@musics).page(params[:page]).per(9)
   end
 
   def show

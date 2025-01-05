@@ -35,6 +35,22 @@
   <div class="decision-button-container">
     <%= form.submit '決定', class: "btn btn-success decision-button" %>
   </div>
+
 <% end %>
 
+<!-- ページネーションリンク -->
+<div class="pagination-container">
+  <%= paginate @musics, theme: 'bootstrap-5' %>
+</div>
 
+<script>
+  document.querySelectorAll('.music-item').forEach(item => {
+    item.addEventListener('click', function() {
+      const musicId = this.getAttribute('data-music-id');
+      const radioButton = this.querySelector('input[type="radio"]');
+      if (radioButton) {
+        radioButton.checked = true;
+      }
+    });
+  });
+</script>

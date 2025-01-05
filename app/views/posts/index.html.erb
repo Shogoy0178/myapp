@@ -67,6 +67,10 @@
       </li>
     <% end %>
   </ul>
+
+  <!-- ページネーション -->
+  <%= paginate @posts, theme: 'bootstrap-5' %>
+
 <% else %>
   <p>投稿はありません。</p>
 <% end %>

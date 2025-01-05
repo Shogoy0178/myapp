@@ -21,18 +21,24 @@
         <div class="movie-card">
           <p class="movie-title"><%= movie['title'] %></p>
 
-          <%= link_to movie_path(movie['id']), class: "movie-link" do %>
-            <% if movie['poster_path'] %>
-              <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "movie-poster" %>
-            <% else %>
-              <p class="no-poster">No Poster Available</p>
-            <% end %>
+
+          <% if movie['poster_path'] %>
+            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "movie-poster" %>
+          <% else %>
+            <p class="no-poster">No Poster Available</p>
           <% end %>
 
           <!-- 映画選択ラジオボタン -->
           <div class="movie-radio">
-            <%= radio_button_tag "movie_id", movie['id'], false, id: "movie-#{movie['id']}" %>
+            <label>
+              <input type="radio" name="movie_id" value="<%= movie['id'] %>" 
+                <%= 'checked' if movie['id'].to_s == params[:movie_id] %> 
+                id="movie-<%= movie['id'] %>" 
+                data-title="<%= movie['title'] %>" 
+                data-poster="<%= movie['poster_path'] %>">
+            </label>
           </div>
+
         </div>
       <% end %>
     <% else %>
@@ -46,4 +52,21 @@
       <%= submit_tag "決定", class: "btn btn-success decision-button" %>
     </div>
   <% end %>
+
 <% end %>
+
+<!-- ページネーションリンク -->
+<div class="pagination-container">
+  <%= paginate @movies, theme: 'bootstrap-5' %>
+</div>
+
+<script>
+  document.querySelectorAll('.movie-card').forEach(item => {
+    item.addEventListener('click', function() {
+      const radioButton = this.querySelector('input[type="radio"]');
+      if (radioButton) {
+        radioButton.checked = true;  // ラジオボタンを選択状態にする
+      }
+    });
+  });
+</script>

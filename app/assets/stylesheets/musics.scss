@@ -80,6 +80,7 @@ form {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 350px; /* 100%で親要素に合わせるが、親要素の幅を管理する */
 
   &:hover {
     transform: translateY(-5px);
@@ -87,7 +88,10 @@ form {
   }
 
   iframe {
-    margin-bottom: 8px; /* プレイヤー下部の余白を調整 */
+    width: 100%; /* iframeの幅を100%に設定 */
+    max-width: 300px; /* 最大幅を指定して、カードの幅が大きくなりすぎないようにする */
+    height: 80px;
+    border: none;
   }
 
   .music-title {

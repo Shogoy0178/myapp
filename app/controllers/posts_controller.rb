@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # 一覧表示
   # posts_controller.rb
   def index
-    @posts = Post.includes(:movie, :music).all
+    @posts = Post.page(params[:page]).per(4) # 1ページあたり10件の投稿を表示
   end
 
   # 新規作成フォーム

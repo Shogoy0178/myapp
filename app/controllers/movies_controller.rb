@@ -2,17 +2,20 @@ class MoviesController < ApplicationController
   def index
     movie_api_key = ENV['TMDB_API']
     raise "TMDB_API key is missing. Please set it in your environment variables." if movie_api_key.blank?
-
+  
     if params[:looking_for]
       movie_title = params[:looking_for]
       url = "https://api.themoviedb.org/3/search/movie?api_key=#{movie_api_key}&language=ja&query=" + URI.encode_www_form_component(movie_title)
     else
       url = "https://api.themoviedb.org/3/movie/popular?api_key=#{movie_api_key}&language=ja"
     end
-
+  
     response = JSON.parse(Net::HTTP.get(URI.parse(url)))
-    @movies = response["results"].first(30)
-  end
+    @movies = response["results"]
+  
+    # ページネーション設定
+    @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(12)
+  end  
 
   def save_selected
     selected_movie_id = params[:movie_id]
