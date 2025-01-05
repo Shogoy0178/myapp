@@ -1,8 +1,14 @@
 <%= turbo_stream.replace "like-button-#{@post.id}" do %>
   <div class="like-button">
-    <%= link_to post_like_path(@post), method: :delete, remote: true, class: "like-btn unlike" do %>
+    <!-- いいね解除ボタン -->
+    <%= link_to post_like_path(post_id: @post.id, id: @like.id), 
+                method: :delete, 
+                remote: true, 
+                class: "like-btn unlike" do %>
       <i class="fa fa-heart liked"></i>
     <% end %>
+    
+    <!-- いいね数 -->
     <span class="like-count"><%= @post.likes.count %></span>
   </div>
 <% end %>

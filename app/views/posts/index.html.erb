@@ -4,33 +4,43 @@
   <ul class="posts-container">
     <% @posts.each do |post| %>
       <li class="post-item">
+        <!-- 映画のポスター表示 -->
         <div class="post-movie">
           <% if post.movie.poster_url.present? %>
             <%= image_tag post.movie.poster_url, alt: post.movie.title, class: "movie-poster" %>
           <% else %>
-            <p>ポスターがありません。</p>
+            <p class="no-poster">ポスターがありません。</p>
           <% end %>
         </div>
 
+        <!-- 投稿内容 -->
         <div class="post-content">
+          <!-- 音楽情報 -->
           <% if post.music %>
             <div class="music-info">
-              <iframe 
-                src="https://open.spotify.com/embed/track/<%= post.music.spotify_track_id %>" 
-                width="100%" 
-                height="60" 
-                frameborder="0" 
-                allowtransparency="true" 
-                allow="encrypted-media">
-              </iframe>
+              <% if post.music.spotify_track_id.present? %>
+                <iframe 
+                  src="https://open.spotify.com/embed/track/<%= post.music.spotify_track_id %>" 
+                  width="100%" 
+                  height="60" 
+                  frameborder="0" 
+                  allowtransparency="true" 
+                  allow="encrypted-media">
+                </iframe>
+              <% else %>
+                <p>Spotifyのトラックが見つかりません。</p>
+              <% end %>
             </div>
           <% end %>
 
+          <!-- 投稿本文 -->
           <div class="post-body">
             <%= post.body.truncate(100) %>
           </div>
 
+          <!-- アクションボタン -->
           <div class="post-actions">
+            <!-- いいねボタン -->
             <%= turbo_frame_tag "like-button-#{post.id}" do %>
               <div class="like-button">
                 <% like = post.likes.find_by(user: current_user) %>
@@ -44,14 +54,15 @@
                   <% end %>
                 <% end %>
                 <span class="like-count"><%= post.likes.count %></span>
-              </div>     
-            <% end %>                     
+              </div>
+            <% end %>
+            <!-- 詳細、編集、削除ボタン -->
             <div class="other-actions">
               <%= link_to '詳細', post_path(post), class: "btn btn-detail" %>
               <%= link_to '編集', edit_post_path(post), class: "btn btn-edit" %>
               <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
             </div>
-          </div>                     
+          </div>
         </div>
       </li>
     <% end %>
@@ -60,4 +71,5 @@
   <p>投稿はありません。</p>
 <% end %>
 
+<!-- 新規投稿ボタン -->
 <%= link_to '新規投稿', new_post_path, class: "btn btn-new" %>
