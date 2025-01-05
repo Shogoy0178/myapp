@@ -14,20 +14,6 @@ class MusicsController < ApplicationController
     @musics = Kaminari.paginate_array(@musics).page(params[:page]).per(9)
   end
 
-  def show
-    @music = session[:selected_music]
-  
-    Rails.logger.debug "セッションの音楽情報: #{@music}"
-  
-    if @music
-      @music_id = @music[:id]
-      @music_title = @music[:name]
-      @music_artist = @music[:artist]
-    else
-      redirect_to musics_path, alert: "音楽情報が見つかりません。"
-    end
-  end
-
   def save_selected
     selected_music_id = params[:selected_music_id]
     post_id = params[:post_id] # 投稿IDを取得

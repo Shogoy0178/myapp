@@ -126,17 +126,23 @@
   background-color: #c82333; /* ホバー時に赤色を変更 */
 }
 
+.new-post-button-container {
+  text-align: center; /* 中央寄せ */
+  margin-top: 20px; /* 必要に応じて余白を調整 */
+}
+
 .btn-new {
-  display: block;
-  margin-top: 20px;
-  text-align: center;
+  display: inline-block; /* ボタンの幅を内容に合わせる */
   background-color: #28a745; /* 緑色の背景 */
   color: white; /* 白い文字 */
-  padding: 10px 20px;
+  padding: 5px 10px; /* ボタンの内側の余白を調整 */
   border-radius: 5px;
   text-decoration: none; /* リンクの下線を消す */
+  font-size: 0.9em; /* フォントサイズを調整 */
 }
 
 .btn-new:hover {
-  background-color: #218838; /* ホバー時に緑色を変更 */
+  background-color: #218838; /* ホバー時の緑色 */
 }
+
+
