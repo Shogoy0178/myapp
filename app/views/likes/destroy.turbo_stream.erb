@@ -1,0 +1,8 @@
+<%= turbo_stream.replace "like-button-#{@post.id}" do %>
+  <div class="like-button">
+    <%= link_to post_like_path(@post), method: :post, remote: true, class: "like-btn like" do %>
+      <i class="fa fa-heart"></i>
+    <% end %>
+    <span class="like-count"><%= @post.likes.count %></span>
+  </div>
+<% end %>

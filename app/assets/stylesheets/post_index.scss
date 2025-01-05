@@ -1,4 +1,4 @@
-/* 投稿全体をグリッドで1つの投稿を3分割する */
+/* 投稿全体をグリッドで1つの投稿を2分割する */
 .posts-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2列にする */
@@ -47,7 +47,7 @@
 
 /* 音楽部分（右上） */
 .music-info {
-  flex: 0 0 30%; /* 音楽トラック部分を60%の高さに変更 */
+  flex: 0 0 30%; /* 音楽トラック部分を30%の高さに変更 */
   margin-bottom: 5px; /* 音楽部分の下に少し余白を追加 */
 }
 
@@ -59,7 +59,7 @@
 
 /* コメント部分（右下） */
 .post-body {
-  flex: 0 0 35%; /* コメント部分は30%の高さ */
+  flex: 0 0 35%; /* コメント部分は35%の高さ */
   border: 1px solid #ccc; /* コメントに枠を追加 */
   padding: 5px;
   margin-top: 5px; /* 音楽とコメントの間の余白を減らす */
@@ -67,14 +67,42 @@
   font-size: 0.8em; /* コメントのフォントサイズを小さく */
 }
 
-/* 編集・削除ボタン */
+/* アクションボタン */
 .post-actions {
-  position: absolute; /* 投稿アイテム内で絶対配置 */
-  bottom: 10px; /* 下から10pxの位置に配置 */
-  right: 10px; /* 右から10pxの位置に配置 */
-  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* ボタン間の間隔 */
+  flex-wrap: wrap; /* ボタンが多い場合に折り返す */
+  margin-top: 10px;
 }
 
+/* いいねボタン */
+.like-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.fa-heart {
+  font-size: 1rem;
+  color: gray; /* いいねボタンが押されていない場合の色（デフォルトは灰色） */
+}
+
+.fa-heart.liked {
+  color: red; /* いいねボタンが押されている場合の色（赤） */
+}
+
+.like-count {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* 他のアクションボタン */
+.other-actions {
+  margin-left: auto; /* 他のアクションボタンを右寄せ */
+}
+
+/* ボタンのスタイル */
 .btn {
   font-size: 0.8em; /* ボタンの文字サイズを少し調整 */
   padding: 5px 8px;

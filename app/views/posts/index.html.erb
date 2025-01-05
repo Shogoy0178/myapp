@@ -1,11 +1,9 @@
-<!-- 投稿一覧ビュー -->
 <h1>投稿一覧</h1>
 
 <% if @posts.any? %>
   <ul class="posts-container">
     <% @posts.each do |post| %>
       <li class="post-item">
-        <!-- ポスター部分（左側） -->
         <div class="post-movie">
           <% if post.movie.poster_url.present? %>
             <%= image_tag post.movie.poster_url, alt: post.movie.title, class: "movie-poster" %>
@@ -14,9 +12,7 @@
           <% end %>
         </div>
 
-        <!-- コンテンツ部分（右側） -->
         <div class="post-content">
-          <!-- 音楽トラック（右上） -->
           <% if post.music %>
             <div class="music-info">
               <iframe 
@@ -30,17 +26,32 @@
             </div>
           <% end %>
 
-          <!-- コメント部分（右下） -->
           <div class="post-body">
             <%= post.body.truncate(100) %>
           </div>
-        </div>
 
-        <!-- アクションボタン -->
-        <div class="post-actions">
-          <%= link_to '詳細', post_path(post), class: "btn btn-detail" %>
-          <%= link_to '編集', edit_post_path(post), class: "btn btn-edit" %>
-          <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+          <div class="post-actions">
+            <%= turbo_frame_tag "like-button-#{post.id}" do %>
+              <div class="like-button">
+                <% like = post.likes.find_by(user: current_user) %>
+                <% if like %>
+                  <%= link_to post_like_path(post_id: post.id, id: like.id), method: :delete, remote: true, class: "like-btn like" do %>
+                    <i class="fa fa-heart liked"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to post_likes_path(post_id: post.id), method: :post, remote: true, class: "like-btn like" do %>
+                    <i class="fa fa-heart"></i>
+                  <% end %>
+                <% end %>
+                <span class="like-count"><%= post.likes.count %></span>
+              </div>     
+            <% end %>                     
+            <div class="other-actions">
+              <%= link_to '詳細', post_path(post), class: "btn btn-detail" %>
+              <%= link_to '編集', edit_post_path(post), class: "btn btn-edit" %>
+              <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+            </div>
+          </div>                     
         </div>
       </li>
     <% end %>
