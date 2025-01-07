@@ -1,0 +1,10 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable  # 新しい警告を有効化
+
+# スタイルガイドの設定例
+Layout/LineLength:
+  Max: 120  # 行の長さの最大文字数
+
+Style/FrozenStringLiteralComment:
+  Enabled: false  # frozen_string_literalコメントを必須にしない
