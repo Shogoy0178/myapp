@@ -40,7 +40,7 @@
         <div class="post-content">
           <!-- ユーザ情報 -->
           <div class="post-user">
-            <%= image_tag post.user.avatar, alt: "#{post.user.name}のアイコン", class: "post-user-avatar" if post.user.avatar.attached? %>
+            <%= image_tag post.user.avatar, class: "post-user-avatar" if post.user.avatar.attached? %>
             <span class="user-name"><%= post.user.name %></span>
           </div>        
           <!-- 映画タイトルと音楽タイトル -->
