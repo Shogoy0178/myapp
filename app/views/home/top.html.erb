@@ -41,9 +41,11 @@
     </div>    
   </div>
 
-  <!-- ログインボタン -->
-  <div class="mt-5">
-    <a href="/users/new" class="btn btn-primary btn-lg">会員登録</a>      
-    <a href="/login" class="btn btn-primary btn-lg">ログイン</a> 
-  </div>
+  <!-- ログインボタンと会員登録ボタン (ログインしていない場合のみ表示) -->
+  <% if current_user.nil? %>
+    <div class="mt-5">
+      <a href="/users/new" class="btn btn-primary btn-lg">会員登録</a>      
+      <a href="/login" class="btn btn-primary btn-lg">ログイン</a> 
+    </div>
+  <% end %>
 </div>

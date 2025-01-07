@@ -5,14 +5,22 @@
   gap: 20px; /* 要素間の余白 */
 }
 
+.user-avatar {
+  width: 120px; /* 親要素の幅 */
+  height: 120px; /* 親要素の高さ */
+  text-align: center; /* アバターを中央揃え */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .user-avatar img.mypage-avatar {
-  width: 120px; /* アバターの幅 */
-  height: 120px; /* アバターの高さ */
+  width: 100%; /* 親要素の幅に合わせて画像の幅を100%に */
+  height: 100%; /* 親要素の高さに合わせて画像の高さを100%に */
   object-fit: cover; /* 画像の切り取りを調整 */
   border-radius: 50%; /* 円形にする */
   border: 2px solid #ddd; /* 枠線を追加 */
 }
-
 .user-info-item {
   width: 80%; /* 枠の幅 */
   max-width: 400px; /* 枠の最大幅 */

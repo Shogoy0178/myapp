@@ -23,7 +23,7 @@
           <%= f.label :avatar, "アバター画像", class: "form-label" %>
           <%= f.file_field :avatar, class: "form-control", id: "avatar-upload" %>
           <div class="avatar-preview mt-3">
-            <img id="avatar-preview" src="#" alt="アバター画像プレビュー" class="rounded-circle d-none" />
+            <img id="avatar-preview" src="" alt="アバター画像プレビュー" class="rounded-circle d-none" />
           </div>
         </div>
         <div class="submit-button-container text-center mt-3">
@@ -44,16 +44,31 @@
 
     avatarUpload.addEventListener("change", (event) => {
       const file = event.target.files[0];
+
       if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          avatarPreview.src = e.target.result;
-          avatarPreview.classList.remove("d-none");
-        };
-        reader.readAsDataURL(file);
+        // 画像ファイルのみを処理
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+
+          reader.onload = (e) => {
+            avatarPreview.src = e.target.result;
+            avatarPreview.classList.remove("d-none");  // プレビュー表示
+          };
+
+          reader.onerror = (e) => {
+            console.error("画像の読み込みに失敗しました:", e);
+          };
+
+          reader.readAsDataURL(file);
+        } else {
+          // 画像でない場合、エラーメッセージを表示
+          alert("画像ファイルを選択してください");
+          avatarPreview.src = "";
+          avatarPreview.classList.add("d-none");  // プレビュー非表示
+        }
       } else {
-        avatarPreview.src = "#";
-        avatarPreview.classList.add("d-none");
+        avatarPreview.src = "";
+        avatarPreview.classList.add("d-none");  // プレビュー非表示
       }
     });
   });

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "ユーザー登録が成功しました！"
-      redirect_to root_path
+      redirect_to login_path
     else
       flash[:alert] = "ユーザー登録に失敗しました。"
       flash[:error_messages] = @user.errors.full_messages # エラーメッセージをflashに格納
@@ -29,7 +29,6 @@ class UsersController < ApplicationController
     redirect_to root_path, alert: "アクセス権がありません。" unless @user == current_user
   end
   
-
   private
 
   def user_params
