@@ -1,0 +1,15 @@
+<div class="like-button" id="like-button-<%= post.id %>">
+  <% like = post.likes.find_by(user: current_user) %>
+  <% if like %>
+    <!-- いいね解除ボタン -->
+    <%= link_to post_like_path(post_id: post.id, id: like.id), method: :delete, class: "like-btn unlike" do %>
+      <i class="fa fa-heart liked"></i>
+    <% end %>
+  <% else %>
+    <!-- いいね追加ボタン -->
+    <%= link_to post_likes_path(post_id: post.id), method: :post, class: "like-btn like" do %>
+      <i class="fa fa-heart"></i>
+    <% end %>
+  <% end %>
+  <span class="like-count"><%= post.likes.count %></span>
+</div>

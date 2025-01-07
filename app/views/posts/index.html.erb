@@ -56,19 +56,7 @@
           <div class="post-actions">
             <!-- いいねボタン -->
             <%= turbo_frame_tag "like-button-#{post.id}" do %>
-              <div class="like-button">
-                <% like = post.likes.find_by(user: current_user) %>
-                <% if like %>
-                  <%= link_to post_like_path(post_id: post.id, id: like.id), method: :delete, remote: true, class: "like-btn like" do %>
-                    <i class="fa fa-heart liked"></i>
-                  <% end %>
-                <% else %>
-                  <%= link_to post_likes_path(post_id: post.id), method: :post, remote: true, class: "like-btn like" do %>
-                    <i class="fa fa-heart"></i>
-                  <% end %>
-                <% end %>
-                <span class="like-count"><%= post.likes.count %></span>
-              </div>
+              <%= render 'posts/like_button', post: post %>
             <% end %>
           
             <!-- 詳細、編集、削除ボタン -->
