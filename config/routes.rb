@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     collection do
       get :my_posts     # マイ投稿ビュー
       get :liked_posts  # いいね投稿一覧ビュー
-    end
+      post :cancel      # 戻るボタン用のアクション（POSTメソッドに変更）
+    end  
     resources :likes, only: %i[create destroy]  # いいねの管理
   end  
 

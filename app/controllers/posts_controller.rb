@@ -26,6 +26,14 @@ class PostsController < ApplicationController
     # @selected_movieがnilの場合、フォーム内で何も表示しない
   end
 
+  # 戻るボタンのアクション
+  def cancel
+    session.delete(:selected_movie)  # セッションから映画情報を削除
+    session.delete(:selected_music)  # セッションから音楽情報を削除
+    
+    redirect_to posts_path  # または他の適切なパス
+  end
+
   def create
     # current_user を使用して新しい Post を初期化
     @post = current_user.posts.new(post_params)

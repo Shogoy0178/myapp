@@ -108,3 +108,9 @@
     margin-top: 30px; /* 上の余白を調整 */
   }
 }
+
+.post-submit-button .btn {
+  padding: 5px 15px; /* ボタンの上下左右のパディングを調整 */
+  font-size: 0.875rem; /* フォントサイズを小さく */
+  width: auto; /* 幅を自動調整 */
+}
