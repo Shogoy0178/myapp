@@ -13,6 +13,8 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] %>
   bucket: <%= ENV['AWS_BUCKET'] %>
+  path_style: true # 必要に応じて追加
+  acl: public_read  # 必要に応じてアクセス制御リストを設定
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
