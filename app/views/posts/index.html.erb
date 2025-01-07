@@ -100,7 +100,9 @@
   <p>投稿はありません。</p>
 <% end %>
 
-<!-- 新規投稿ボタン -->
-<div class="new-post-button-container">
-  <%= link_to '新規投稿', new_post_path, class: "btn btn-new" %>
-</div>
+<!-- 新規投稿ボタン（ログインしている場合のみ表示） -->
+<% if current_user %>
+  <div class="new-post-button-container">
+    <%= link_to '新規投稿', new_post_path, class: "btn btn-new" %>
+  </div>
+<% end %>

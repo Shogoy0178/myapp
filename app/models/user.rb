@@ -15,8 +15,5 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
-
-  def avatar_url
-    avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_url(avatar, only_path: false) : ActionController::Base.helpers.asset_path("top.jpg")
-  end
+  
 end

@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
 
   def new
+    # ユーザー登録画面に遷移したときにセッションをリセット
+    reset_session
     @user = User.new
   end
 
