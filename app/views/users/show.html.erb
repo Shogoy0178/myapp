@@ -5,23 +5,17 @@
 </div>
 
 <div class="user-info">
-  <p><strong>メールアドレス:</strong> <%= @user.email %></p>
-
   <% if @user.avatar.attached? %>
-    <p><strong>アバター:</strong></p>
-    <%= image_tag @user.avatar, class: "mypage-avatar" %>
+    <div class="user-avatar">
+      <%= image_tag @user.avatar, class: "mypage-avatar" %>
+    </div>
   <% end %>
-</div>
-
-<div class="related-info">
-  <h2>関連情報</h2>
-  <% if defined?(@posts) && @posts.any? %>
-    <ul>
-      <% @posts.each do |post| %>
-        <li><%= link_to post.title, post_path(post) %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>まだ投稿がありません。</p>
-  <% end %>
+  <div class="user-name user-info-item">
+    <p class="label"><strong>名前:</strong></p>
+    <p class="content"><%= @user.name %></p>
+  </div>
+  <div class="user-email user-info-item">
+    <p class="label"><strong>メールアドレス:</strong></p>
+    <p class="content"><%= @user.email %></p>
+  </div>
 </div>

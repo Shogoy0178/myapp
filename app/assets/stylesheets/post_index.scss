@@ -26,13 +26,15 @@
   justify-content: center;
   align-items: center;
   margin-right: 15px;
-  overflow: hidden; /* ポスターが枠をはみ出さないようにする */
+  overflow: hidden; /* 必要であればオーバーフローを隠す */
 }
 
 .movie-poster {
-  width: 100%; /* 親要素の幅に合わせてポスターの幅を調整 */
-  height: auto; /* 縦横比を保ちながら高さを調整 */
-  object-fit: cover; /* 縦横比を保ちながら親要素のサイズに収める */
+  max-width: 100%; /* 親要素の幅に収まるようにする */
+  max-height: 100%; /* 親要素の高さに収まるようにする */
+  object-fit: contain; /* 縦横比を維持しながら全体を表示 */
+  height: 100%; /* 親要素にフィットさせる高さ */
+  width: auto; /* 横幅は自動調整 */
 }
 
 /* 右側のコンテンツ */
@@ -42,24 +44,18 @@
   flex-direction: column;
   justify-content: flex-start; /* 音楽とコメントを上下に配置 */
   padding: 5px;
-  height: 100%; /* コンテンツ領域を100%に */
+  height: 80%; /* コンテンツ領域を100%に */
 }
 
 /* 音楽部分（右上） */
 .music-info {
   flex: 0 0 30%; /* 音楽トラック部分を30%の高さに変更 */
-  margin-bottom: 5px; /* 音楽部分の下に少し余白を追加 */
-}
-
-.music-info iframe {
-  width: 100%; /* 音楽トラックを枠いっぱいに */
-  height: 100%; /* 音楽トラックの高さを大きくする */
-  border: none; /* iframeの枠線を削除 */
+  margin-bottom: 5px; /* 音楽とコメントの間の余白を追加 */ 
 }
 
 /* コメント部分（右下） */
 .post-body {
-  flex: 0 0 35%; /* コメント部分は35%の高さ */
+  flex: 0 0 25%; /* コメント部分は25%の高さ */
   border: 1px solid #ccc; /* コメントに枠を追加 */
   padding: 5px;
   margin-top: 5px; /* 音楽とコメントの間の余白を減らす */
@@ -145,4 +141,33 @@
   background-color: #218838; /* ホバー時の緑色 */
 }
 
+.post-title {
+  border: 1px solid #ccc; /* 枠線の色 */
+  padding: 10px; /* 内側の余白 */
+  border-radius: 8px; /* 角を丸くする */
+  font-size: 0.8em;
+  font-weight: bold; /* 太字にする */
+  margin-bottom: 10px; /* 下に余白を追加 */
+  text-align: left; /* テキストを中央揃え */
+}
 
+/* ユーザ情報 */
+.post-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* ユーザ情報と他要素の間に余白 */
+}
+
+.user-avatar {
+  width: 40px; /* アイコンの幅 */
+  height: 40px; /* アイコンの高さ */
+  border-radius: 50%; /* 円形にする */
+  object-fit: cover; /* アイコン画像の縦横比を維持して中央を表示 */
+  margin-right: 10px; /* 名前との間隔を調整 */
+}
+
+.user-name {
+  font-size: 1em; /* フォントサイズを適切に調整 */
+  font-weight: bold; /* 名前を強調 */
+  color: #333; /* テキストカラー */
+}

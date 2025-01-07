@@ -1,33 +1,60 @@
-<div class="container">
+<div class="container user-registration">
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
-      <h1>ユーザー登録</h1>
-      <%= form_with model: @user, data: { turbo: false } do |f| %>
+      <h1 class="registration-title">ユーザー登録</h1>
+      <%= form_with model: @user, data: { turbo: false }, class: "registration-form" do |f| %>
         <div class="mb-3">
-          <%= f.label :name, class: "form-label" %>
+          <%= f.label :name, "名前", class: "form-label" %>
           <%= f.text_field :name, class: "form-control" %>
         </div>
         <div class="mb-3">
-          <%= f.label :email, class: "form-label" %>
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
           <%= f.email_field :email, class: "form-control" %>
         </div>
         <div class="mb-3">
-          <%= f.label :password, class: "form-label" %>
+          <%= f.label :password, "パスワード", class: "form-label" %>
           <%= f.password_field :password, class: "form-control" %>
         </div>
         <div class="mb-3">
-          <%= f.label :password_confirmation, class: "form-label" %>
+          <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
           <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
         <div class="mb-3">
           <%= f.label :avatar, "アバター画像", class: "form-label" %>
-          <%= f.file_field :avatar, class: "form-control" %>
+          <%= f.file_field :avatar, class: "form-control", id: "avatar-upload" %>
+          <div class="avatar-preview mt-3">
+            <img id="avatar-preview" src="#" alt="アバター画像プレビュー" class="rounded-circle d-none" />
+          </div>
         </div>
-        <%= f.submit "登録", class: "btn btn-primary" %>
+        <div class="submit-button-container text-center mt-3">
+          <%= f.submit "登録", class: "btn btn-primary submit-button" %>
+        </div>
       <% end %>
-      <div class='text-center'>
-        <%= link_to 'ログインページへ', login_path %>
+      <div class="text-center mt-3">
+        <%= link_to 'ログインページへ', login_path, class: "login-link" %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const avatarUpload = document.getElementById("avatar-upload");
+    const avatarPreview = document.getElementById("avatar-preview");
+
+    avatarUpload.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          avatarPreview.src = e.target.result;
+          avatarPreview.classList.remove("d-none");
+        };
+        reader.readAsDataURL(file);
+      } else {
+        avatarPreview.src = "#";
+        avatarPreview.classList.add("d-none");
+      }
+    });
+  });
+</script>

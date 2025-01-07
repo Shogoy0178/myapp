@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  skip_before_action :require_login, only: [:index, :show]
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_movie, only: [:new, :create]
   before_action :set_music, only: [:new, :create]
@@ -6,7 +7,12 @@ class PostsController < ApplicationController
   # 一覧表示
   # posts_controller.rb
   def index
-    @posts = Post.page(params[:page]).per(4) # 1ページあたり10件の投稿を表示
+    # セッション情報を削除
+    session.delete(:selected_movie)
+    session.delete(:selected_music)
+    
+    # 投稿とそのユーザ情報を一度に取得
+    @posts = Post.includes(:user).page(params[:page]).per(4)
   end
 
   # 新規作成フォーム
@@ -74,6 +80,10 @@ class PostsController < ApplicationController
       session.delete(:selected_music)
       redirect_to posts_path, notice: "投稿が作成されました。"
     else
+      # 保存失敗時の処理
+      @selected_movie = session[:selected_movie] if session[:selected_movie].present?
+      @selected_music = session[:selected_music] if session[:selected_music].present?
+
       # 保存失敗時のデバッグログとエラーメッセージ
       logger.debug "Post save failed: #{@post.errors.full_messages}"
       flash.now[:alert] = "投稿の作成に失敗しました。入力内容を確認してください。"
@@ -147,6 +157,17 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "投稿が削除されました。"
   end
 
+  def my_posts
+    @posts = current_user.posts.page(params[:page]).per(4) # 1ページあたり4件を表示
+    render :index
+  end
+
+  def liked_posts
+    # ユーザーが「いいね」した投稿を取得
+    @posts = current_user.liked_posts.includes(:user, :movie, :music).page(params[:page]).per(4)
+    render :index
+  end  
+
   private
 
   def set_post
@@ -164,4 +185,5 @@ class PostsController < ApplicationController
   def set_music
     @music = session[:selected_music]  # 音楽情報（もし必要であれば）
   end
+  
 end

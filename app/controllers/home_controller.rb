@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
+  # ログインチェックを行わない
+  skip_before_action :require_login, only: [:top]  # ログインしなくてもアクセスできるように設定
+
   def top
-    redirect_to login_path unless current_user
   end  
 end

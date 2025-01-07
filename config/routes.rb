@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy", as: :logout
 
-  # 投稿管理 + いいね機能
   resources :posts, only: %i[index new create edit update destroy show] do
-    resources :likes, only: %i[create destroy]  # 複数の「いいね」を管理
-  end
+    collection do
+      get :my_posts     # マイ投稿ビュー
+      get :liked_posts  # いいね投稿一覧ビュー
+    end
+    resources :likes, only: %i[create destroy]  # いいねの管理
+  end  
 
   resources :movies, only: [:index, :show] do
     collection do

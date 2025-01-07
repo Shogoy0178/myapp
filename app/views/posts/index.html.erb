@@ -1,4 +1,10 @@
-<h1>投稿一覧</h1>
+<% if controller.action_name == 'my_posts' %>
+  <h1>マイ投稿</h1>
+<% elsif controller.action_name == 'liked_posts' %>
+  <h1>いいねした投稿</h1>
+<% else %>
+  <h1>すべての投稿</h1>
+<% end %>
 
 <% if @posts.any? %>
   <ul class="posts-container">
@@ -6,7 +12,7 @@
       <li class="post-item">
         <!-- 映画のポスター表示 -->
         <div class="post-movie">
-          <% if post.movie.poster_url.present? %>
+          <% if post.movie && post.movie.poster_url.present? %>
             <%= image_tag post.movie.poster_url, alt: post.movie.title, class: "movie-poster" %>
           <% else %>
             <p class="no-poster">ポスターがありません。</p>
@@ -15,22 +21,30 @@
 
         <!-- 投稿内容 -->
         <div class="post-content">
+          <!-- ユーザ情報 -->
+          <div class="post-user">
+            <%= image_tag post.user.avatar_url, alt: "#{post.user.name}のアイコン", class: "user-avatar" if post.user.avatar_url.present? %>
+            <span class="user-name"><%= post.user.name %></span>
+          </div>        
+          <!-- 映画タイトルと音楽タイトル -->
+          <div class="post-title">
+            映画タイトル: <%= post.movie&.title || '未設定' %> <br>
+            音楽タイトル: <%= post.music&.title || '未設定' %>
+          </div>    
           <!-- 音楽情報 -->
           <% if post.music %>
-            <div class="music-info">
-              <% if post.music.spotify_track_id.present? %>
-                <iframe 
-                  src="https://open.spotify.com/embed/track/<%= post.music.spotify_track_id %>" 
-                  width="100%" 
-                  height="60" 
-                  frameborder="0" 
-                  allowtransparency="true" 
-                  allow="encrypted-media">
-                </iframe>
-              <% else %>
-                <p>Spotifyのトラックが見つかりません。</p>
-              <% end %>
-            </div>
+            <% if post.music && post.music.spotify_track_id.present? %>
+              <iframe 
+                src="https://open.spotify.com/embed/track/<%= post.music.spotify_track_id %>" 
+                width="100%" 
+                height="85" 
+                frameborder="0" 
+                allowtransparency="true" 
+                allow="encrypted-media">
+              </iframe>
+            <% else %>
+              <p>Spotifyのトラックが見つかりません。</p>
+            <% end %>
           <% end %>
 
           <!-- 投稿本文 -->
@@ -56,13 +70,19 @@
                 <span class="like-count"><%= post.likes.count %></span>
               </div>
             <% end %>
+          
             <!-- 詳細、編集、削除ボタン -->
             <div class="other-actions">
               <%= link_to '詳細', post_path(post), class: "btn btn-detail" %>
-              <%= link_to '編集', edit_post_path(post), class: "btn btn-edit" %>
-              <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+          
+              <% if current_user == post.user %>
+                <!-- 作成者のみ表示 -->
+                <%= link_to '編集', edit_post_path(post), class: "btn btn-edit" %>
+                <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+              <% end %>
             </div>
           </div>
+          
         </div>
       </li>
     <% end %>

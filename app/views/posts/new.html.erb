@@ -62,7 +62,7 @@
       <div class="comment-section">
         <h3 class="section-title">コメント</h3>
         <div class="comment-group">
-          <%= form.text_area :body, class: "form-control comment-textarea", rows: 5 %>
+          <%= form.text_area :body, class: "form-control comment-textarea", rows: 5, value: @post.body %>
         </div>
       </div>      
       <!-- 投稿ボタン -->
