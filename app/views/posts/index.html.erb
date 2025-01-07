@@ -6,6 +6,23 @@
   <h1>すべての投稿</h1>
 <% end %>
 
+<div class="search-container">
+  <%= search_form_for @q, url: posts_path, method: :get, class: "search-form" do |f| %>
+    <!-- 映画タイトル検索 -->
+    <div class="form-group">
+      <%= f.text_field :movie_title_cont, class: "form-control", placeholder: "映画タイトルを検索" %>
+    </div>
+    <!-- 音楽タイトル検索 -->
+    <div class="form-group">
+      <%= f.text_field :music_title_cont, class: "form-control", placeholder: "音楽タイトルを検索" %>
+    </div>
+    <!-- 検索ボタン -->
+    <div class="form-group">
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
 <% if @posts.any? %>
   <ul class="posts-container">
     <% @posts.each do |post| %>

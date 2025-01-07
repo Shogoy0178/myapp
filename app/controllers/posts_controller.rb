@@ -11,9 +11,12 @@ class PostsController < ApplicationController
     session.delete(:selected_movie)
     session.delete(:selected_music)
     
-    # 投稿とそのユーザ情報を一度に取得
-    @posts = Post.includes(:user).page(params[:page]).per(4)
-  end
+    # Ransack検索オブジェクトを作成
+    @q = Post.ransack(params[:q])
+    
+    # 検索結果を取得（投稿とユーザ情報、関連モデルを含む）
+    @posts = @q.result.includes(:user, :movie, :music).page(params[:page]).per(4)
+  end  
 
   # 新規作成フォーム
   def new
@@ -114,7 +117,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       if session[:selected_movie].present?
         movie_data = session[:selected_movie]
-        
+  
         # 映画が存在するか確認
         movie = @post.movie || Movie.find_by(tmdb_movie_id: movie_data["id"])
   
@@ -134,7 +137,7 @@ class PostsController < ApplicationController
   
       if session[:selected_music].present?
         music_data = session[:selected_music]
-        
+  
         # 音楽が存在するか確認
         music = @post.music || Music.find_by(spotify_track_id: music_data["id"])
   
@@ -154,9 +157,11 @@ class PostsController < ApplicationController
       # 投稿を保存してリダイレクト
       redirect_to posts_path, notice: "投稿が更新されました。"
     else
+      # 更新失敗時の処理
+      flash.now[:alert] = "投稿の更新に失敗しました。入力内容を確認してください。"
       render :edit
     end
-  end  
+  end   
   
 
   # 投稿の削除
@@ -166,15 +171,16 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    @posts = current_user.posts.page(params[:page]).per(4) # 1ページあたり4件を表示
+    @q = current_user.posts.ransack(params[:q]) # Ransackオブジェクトを作成
+    @posts = @q.result.page(params[:page]).per(4) # 検索結果をページネーション
     render :index
   end
-
+  
   def liked_posts
-    # ユーザーが「いいね」した投稿を取得
-    @posts = current_user.liked_posts.includes(:user, :movie, :music).page(params[:page]).per(4)
+    @q = current_user.liked_posts.ransack(params[:q]) # Ransackオブジェクトを作成
+    @posts = @q.result.includes(:user, :movie, :music).page(params[:page]).per(4) # 検索結果をページネーション
     render :index
-  end  
+  end
 
   private
 

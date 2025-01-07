@@ -142,9 +142,7 @@
 }
 
 .post-title {
-  border: 1px solid #ccc; /* 枠線の色 */
-  padding: 10px; /* 内側の余白 */
-  border-radius: 8px; /* 角を丸くする */
+  padding: 5px 0; /* 上下の余白を追加 */
   font-size: 0.8em;
   font-weight: bold; /* 太字にする */
   margin-bottom: 10px; /* 下に余白を追加 */
@@ -171,3 +169,39 @@
   font-weight: bold; /* 名前を強調 */
   color: #333; /* テキストカラー */
 }
+
+.search-container {
+  max-width: 100%;
+  margin: 0 auto; /* 中央揃え */
+  background-color: #f9f9f9; /* 背景色 */
+}
+
+.search-form .form-group {
+  margin-bottom: 15px;
+  display: flex; /* フレックスボックスを有効化 */
+  align-items: center; /* 垂直方向の中央揃え */
+}
+
+.search-form .form-label {
+  margin-right: 10px; /* ラベルとフィールド間の余白 */
+  font-size: 16px; /* ラベルのフォントサイズ */
+}
+
+.search-form .form-control {
+  height: 50px; /* 入力フィールドの高さを統一 */
+  font-size: 16px;
+  flex-grow: 1; /* 入力フィールドを幅いっぱいに広げる */
+}
+
+.search-form .btn-primary {
+  background-color: #007bff; /* ボタン色 */
+  border-color: #007bff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.search-form .btn-primary:hover {
+  background-color: #0056b3; /* ホバー時の色 */
+  border-color: #0056b3;
+}
+
