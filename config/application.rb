@@ -1,6 +1,9 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+# Load the Rails application.
+require_relative 'boot'
+
+require 'rails/all'
 require 'ostruct'
 
 # Require the gems listed in Gemfile, including any gems

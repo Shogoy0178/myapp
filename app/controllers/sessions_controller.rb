@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
+# セッションコントローラ
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
 
-  def new
-  end
+  def new; end
 
   def create
     user = login(params[:email], params[:password])
@@ -12,10 +14,9 @@ class SessionsController < ApplicationController
       render :new
     end
   end
-  
+
   def destroy
     logout
     redirect_to root_path
-  end   
-  
+  end
 end

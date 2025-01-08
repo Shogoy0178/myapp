@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# このマイグレーションは、postsテーブルを追加します。
 class CreatePosts < ActiveRecord::Migration[6.1]
   def change
     create_table :posts do |t|

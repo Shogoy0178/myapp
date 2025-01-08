@@ -1,6 +1,7 @@
 # Rubyベースイメージの指定
 FROM ruby:3.1.2
 
+# vimをインストール
 RUN apt-get update && apt-get install -y vim
 
 # 必要なシステムライブラリをインストール
@@ -24,8 +25,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN apt-get update && apt-get install -y \
 libvips42
 
+# バンドルのバージョンを指定
 RUN apt-get update -qq && apt-get install -y build-essential libssl-dev
 
+# バンドルのバージョンを指定
 RUN apt-get update -qq && apt-get install -y postgresql-client
 
 # アプリケーションディレクトリを作成
