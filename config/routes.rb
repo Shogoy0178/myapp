@@ -35,5 +35,4 @@ Rails.application.routes.draw do
       post :save_selected
     end
   end
-  
 end

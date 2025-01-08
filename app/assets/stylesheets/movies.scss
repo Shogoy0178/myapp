@@ -4,19 +4,40 @@ $border-color: #ddd;
 $text-color: #333;
 $muted-color: #888;
 $link-hover-color: darken($primary-color, 15%);
+$button-padding: 12px 24px;
+$font-size: 16px;
+$border-radius: 8px;
 
+// 共通スタイル
+.button {
+  padding: $button-padding;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-hover-color;
+  }
+}
+
+.input, .button {
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+// 映画検索フォーム
 .movie-search-container {
   display: flex;
   justify-content: center;
   margin: 20px 0;
-  width: 100%; 
 }
 
 .movie-search-form {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
@@ -24,10 +45,8 @@ $link-hover-color: darken($primary-color, 15%);
   width: 350px;
   padding: 12px;
   border: 1px solid $border-color;
-  border-radius: 8px;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
+  border-radius: $border-radius;
+  font-size: $font-size;
 
   &:focus {
     border-color: $primary-color;
@@ -35,69 +54,16 @@ $link-hover-color: darken($primary-color, 15%);
 }
 
 .movie-search-button {
-  padding: 12px 24px;
-  background-color: $primary-color;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: $primary-hover-color;
-  }
+  @extend .button;
 }
 
-// 映画選択ボタンのスタイル
-// 映画選択フォームのスタイル
+// 映画選択フォーム
 .movies-selection-form {
-  position: relative; /* 親要素に相対的に配置 */
-  padding-bottom: 60px; /* 最下部に余白を追加してボタンが隠れないように */
+  position: relative;
+  padding-bottom: 60px;
 }
 
-// 映画選択ボタンのスタイル
-.decision-button-container {
-  position: absolute; /* 絶対位置で配置 */
-  bottom: 20px; /* フォームの最下部から20pxの距離を確保 */
-  left: 50%; /* 水平方向に中央配置 */
-  transform: translateX(-50%); /* 水平方向に中央揃え */
-  width: 100%; /* 親要素の幅に合わせる */
-  text-align: center; /* ボタンを中央に寄せる */
-}
-
-.decision-button {
-  padding: 12px 24px;
-  background-color: $primary-color;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: $link-hover-color;
-  }
-}
-
-
-.btn-primary {
-  padding: 12px 24px;
-  background-color: $primary-color;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: $primary-hover-color;
-  }
-}
-
-// 映画コンテナ
+// 映画カード
 .movies-container {
   display: flex;
   flex-wrap: wrap;
@@ -106,9 +72,9 @@ $link-hover-color: darken($primary-color, 15%);
   margin: 20px;
 
   .movie-card {
-    width: calc(25% - 15px); 
+    width: calc(25% - 15px);
     border: 1px solid $border-color;
-    border-radius: 8px;
+    border-radius: $border-radius;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     background-color: white;
@@ -161,4 +127,18 @@ $link-hover-color: darken($primary-color, 15%);
   .movies-container .movie-card {
     width: 100%; 
   }
+}
+
+// 決定ボタンのスタイル
+.decision-button-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+.decision-button {
+  @extend .button;
 }

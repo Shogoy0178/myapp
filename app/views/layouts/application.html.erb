@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>filmusic</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,40 +15,39 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "movies", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "musics", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "mypage", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "post_index", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "post_new", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "post_show", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "login", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "user_new", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "user_show", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "user", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <%= render 'layouts/header' %>
 
-    <% if flash[:notice] %>
-      <div class="alert alert-success">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
+    <!-- 共通スタイル -->
+    <style>
+      .alert {
+        max-width: 600px; /* 幅を制限 */
+        margin: 0 auto;   /* 中央揃え */        
+      }
+    </style>
 
-    <% if flash[:alert] %>
-      <div class="alert alert-danger">
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
+    <!-- フラッシュメッセージ -->
+    <div class="container my-4">
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
 
-    <% if flash[:error_messages] %>
-      <div class="alert alert-danger">
-        <ul>
-          <% flash[:error_messages].each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+    </div>
 
     <%= yield %>
 

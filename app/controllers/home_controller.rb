@@ -3,7 +3,7 @@
 # ホーム画面のコントローラ
 class HomeController < ApplicationController
   # ログインチェックを行わない
-  skip_before_action :require_login, only: [:top] # ログインしなくてもアクセスできるように設定
+  skip_before_action :require_login, only: [:top]
 
   def top; end
 end
