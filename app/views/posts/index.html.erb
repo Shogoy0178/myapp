@@ -40,9 +40,13 @@
         <div class="post-content">
           <!-- ユーザ情報 -->
           <div class="post-user">
-            <%= image_tag post.user.avatar, class: "post-user-avatar" if post.user.avatar.attached? %>
+            <% if post.user.avatar.attached? %>
+              <%= image_tag post.user.avatar, class: "post-user-avatar" %>
+            <% else %>
+              <%= image_tag "sample.jpg", class: "post-user-avatar", alt: "デフォルトアバター" %> <!-- デフォルト画像 -->
+            <% end %>
             <span class="user-name"><%= post.user.name %></span>
-          </div>        
+          </div>            
           <!-- 映画タイトルと音楽タイトル -->
           <div class="post-title">
             映画タイトル: <%= post.movie&.title || '未設定' %> <br>

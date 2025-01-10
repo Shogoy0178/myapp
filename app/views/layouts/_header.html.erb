@@ -30,11 +30,24 @@
       </ul>
     </nav>
 
-    <!-- ログイン/ログアウトリンク -->
-    <div>
+    <!-- ユーザー情報＆ログイン/ログアウトリンク -->
+    <div class="d-flex align-items-center">
       <% if logged_in? %>
+        <!-- アバター画像とユーザー名 -->
+        <div class="d-flex align-items-center me-3">
+          <%= link_to user_path(current_user), class: "text-decoration-none d-flex align-items-center" do %>
+            <% if current_user.avatar.attached? %>
+              <%= image_tag current_user.avatar.variant(resize_to_fill: [40, 40]), class: "avatar-img-header", alt: current_user.name %>
+            <% else %>
+              <%= image_tag "sample.jpg", class: "avatar-img-header", alt: "デフォルトアバター" %> <!-- デフォルト画像 -->
+            <% end %>
+            <span class="ms-2 text-dark fw-bold"><%= current_user.name %></span>
+          <% end %>
+        </div>
+        <!-- ログアウトリンク -->
         <%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-primary btn-sm", data: { turbo: false } %>
       <% else %>
+        <!-- ログインリンク -->
         <%= link_to "ログイン", login_path, class: "btn btn-primary btn-sm" %>
       <% end %>
     </div>

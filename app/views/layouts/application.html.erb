@@ -38,14 +38,23 @@
           <%= flash[:notice] %>
         </div>
       <% end %>
-
+    
       <% if flash[:alert] %>
         <div class="alert alert-danger">
           <%= flash[:alert] %>
         </div>
       <% end %>
-
-    </div>
+    
+      <% if flash[:error_messages] %>
+        <div class="alert alert-danger">
+          <ul>
+            <% flash[:error_messages].each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>    
 
     <%= yield %>
 

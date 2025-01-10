@@ -14,6 +14,16 @@ header {
   background-color: #343a40;
   color: white;
   padding: 10px 0;
+
+  .avatar-img-header {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: block;
+    object-fit: cover; /* 画像を枠内に収める */
+  }
+
 }
 
 footer {
@@ -21,4 +31,11 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
+}
+
+.img-uniform {
+  width: 100%; /* レスポンシブ対応 */
+  border-radius: 8px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* より強調された影 */
+  border: 2px solid #007bff; /* 青色の枠線を追加 */
 }

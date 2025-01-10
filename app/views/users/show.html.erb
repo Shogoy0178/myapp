@@ -5,15 +5,19 @@
 </div>
 
 <div class="user-info">
-  <% if @user.avatar.attached? %>
-    <div class="user-avatar">
+  <div class="user-avatar">
+    <% if @user.avatar.attached? %>
       <%= image_tag @user.avatar, class: "mypage-avatar" %>
-    </div>
-  <% end %>
+    <% else %>
+      <%= image_tag "sample.jpg", class: "mypage-avatar" %> <!-- デフォルト画像 -->
+    <% end %>
+  </div>
+  
   <div class="user-name user-info-item">
     <p class="label"><strong>名前:</strong></p>
     <p class="content"><%= @user.name %></p>
   </div>
+  
   <div class="user-email user-info-item">
     <p class="label"><strong>メールアドレス:</strong></p>
     <p class="content"><%= @user.email %></p>

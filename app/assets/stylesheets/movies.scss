@@ -71,6 +71,14 @@ $border-radius: 8px;
   justify-content: center;
   margin: 20px;
 
+  &.less-than-four {
+    justify-content: space-evenly;
+
+    .movie-card {
+      width: calc(50% - 15px); // 幅を調整
+    }
+  }
+
   .movie-card {
     width: calc(25% - 15px);
     border: 1px solid $border-color;

@@ -5,7 +5,8 @@
   <%= form_tag(movies_path, method: :get, class: "movie-search-form") do %>
     <!-- 投稿IDを隠しフィールドとして渡す -->
     <%= hidden_field_tag :post_id, params[:post_id] %> 
-    <%= search_field_tag :looking_for, nil, placeholder: 'キーワードを入力', class: "movie-search-input" %>
+    <!-- 検索ワードをフィールドに残す -->
+    <%= search_field_tag :looking_for, params[:looking_for], placeholder: 'キーワードを入力', class: "movie-search-input" %>
     <%= submit_tag '検索', class: "movie-search-button" %>
   <% end %>
 </div>
@@ -15,20 +16,16 @@
   <!-- 投稿IDを隠しフィールドで渡す -->
   <%= hidden_field_tag :post_id, params[:post_id] %>
 
-  <div class="movies-container">
+  <div class="movies-container <%= 'less-than-four' if @movies.size < 4 %>">
     <% if @movies.any? %>
       <% @movies.each do |movie| %>
         <div class="movie-card">
           <p class="movie-title"><%= movie['title'] %></p>
-
-
           <% if movie['poster_path'] %>
             <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "movie-poster" %>
           <% else %>
             <p class="no-poster">No Poster Available</p>
           <% end %>
-
-          <!-- 映画選択ラジオボタン -->
           <div class="movie-radio">
             <label>
               <input type="radio" name="movie_id" value="<%= movie['id'] %>" 
@@ -38,7 +35,6 @@
                 data-poster="<%= movie['poster_path'] %>">
             </label>
           </div>
-
         </div>
       <% end %>
     <% else %>
