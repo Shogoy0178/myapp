@@ -91,3 +91,5 @@ gem 'nokogiri', '~> 1.17'
 gem 'erubi', '~> 1.13'
 
 gem 'minitest', '~> 5.25'
+
+gem 'rails-i18n'

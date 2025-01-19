@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'home#top'
 
   # ユーザー管理
-  resources :users, only: %i[new create index show]
+  resources :users, only: %i[index show new create edit update]
 
   # セッション管理（ログイン・ログアウト）
   get 'login', to: 'sessions#new', as: :login

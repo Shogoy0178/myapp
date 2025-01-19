@@ -207,3 +207,80 @@
   background-color: #f9f9f9;
   font-size: 1rem;
 }
+
+/* フォーム全体を縦並び */
+.edit-user form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* フォーム要素間のスペース */
+  max-width: 500px; /* フォームの最大幅 */
+  margin: 0 auto; /* 中央寄せ */
+}
+
+/* フォーム要素のスタイル */
+.edit-user .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ボタンを横並びにする */
+.edit-user .form-actions {
+  display: flex;
+  justify-content: space-between; /* ボタンを両端に配置 */
+  gap: 10px; /* ボタン間のスペース */
+}
+
+.edit-button {
+  text-align: center;
+  margin-top: 20px; /* 任意: ボタンの上に余白を追加 */
+}
+
+/* アバター画像のプレビュー */
+.avatar-preview {
+  text-align: center;
+  margin-bottom: 20px; /* アバター画像とフォーム要素間の余白 */
+
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    margin-bottom: 30px; /* 下部の余白 */
+  }
+}
+
+/* form-controlの幅を統一 */
+.form-control {
+  width: 350px; /* 幅を100%に統一 */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* paddingを幅に含める */
+  margin-bottom: 10px; /* フォームフィールド間の余白 */
+}
+
+/* ボタンを横並びにする */
+.submit-button-container {
+  display: flex;
+  justify-content: space-between; /* ボタンを両端に配置 */
+  align-items: center; /* 垂直方向に中央寄せ */
+  gap: 20px; /* ボタン間のスペース */
+  flex-wrap: nowrap; /* ボタンが折り返されないように設定 */
+}
+
+.submit-button-container .submit-button {
+  flex: 1;
+  padding: 10px 20px; /* ボタンのパディングを調整 */
+  font-size: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap; /* ボタンのテキストが折り返されないように設定 */
+}
+
+.submit-button-container .btn-secondary {
+  flex: 1; /* キャンセルボタンも同様に横並びに */
+  text-align: center;
+}
+

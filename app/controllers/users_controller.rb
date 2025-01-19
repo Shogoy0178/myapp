@@ -34,6 +34,25 @@ class UsersController < ApplicationController
     redirect_to root_path, alert: 'アクセス権がありません。' unless @user == current_user
   end
 
+  # 編集画面の表示
+  def edit
+    @user = User.find(params[:id])
+    redirect_to root_path, alert: 'アクセス権がありません。' unless @user == current_user
+  end
+
+  # ユーザー情報の更新
+  def update
+    @user = User.find(params[:id])
+    if @user == current_user && @user.update(user_params)
+      flash[:notice] = 'ユーザー情報を更新しました。'
+      redirect_to @user
+    else
+      flash[:alert] = 'ユーザー情報の更新に失敗しました。'
+      flash[:error_messages] = @user.errors.full_messages
+      render :edit
+    end
+  end
+
   private
 
   def user_params
