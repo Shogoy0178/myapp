@@ -4,7 +4,7 @@
   <div class="edit-user-form">
     <h1><%= @user.name %> さんの情報を編集</h1>
 
-    <%= form_with model: @user, local: true do |f| %>
+    <%= form_with model: @user, local: true, data: { turbo: false } do |f| %>
       <!-- 名前 -->
       <div class="mb-3">
         <%= f.label :name, '名前', class: 'form-label' %>
